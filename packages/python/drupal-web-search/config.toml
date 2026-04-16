@@ -1,0 +1,46 @@
+[engines]
+default = "brave"
+fallback_order = ["google", "duckduckgo", "bing"]
+
+[engines.duckduckgo]
+enabled = true
+
+[engines.brave]
+api_key = "${BRAVE_API_KEY}"
+enabled = true
+
+[engines.google]
+enabled = true
+
+[engines.bing]
+enabled = true
+
+[engines.perplexity]
+api_key = "${PERPLEXITY_API_KEY}"
+enabled = true
+
+[engines.firecrawl]
+api_key = "${FIRECRAWL_API_KEY}"
+enabled = true
+
+[engines.exa]
+api_key = "${EXA_API_KEY}"
+enabled = false
+
+[engines.tavily]
+api_key = "${TAVILY_API_KEY}"
+enabled = false
+
+[engines.serpapi]
+api_key = "${SERPAPI_API_KEY}"
+enabled = false
+
+[search]
+num_results = 10
+safe_search = "moderate"
+timeout = 30
+
+[site_preferences]
+restrict_to = ["drupal.org", "git.drupalcode.org"]
+preferred = ["github.com", "stackoverflow.com"]
+blocked = ["spam-site.com"]

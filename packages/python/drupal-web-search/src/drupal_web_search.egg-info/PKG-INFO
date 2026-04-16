@@ -1,0 +1,67 @@
+Metadata-Version: 2.4
+Name: drupal-web-search
+Version: 0.1.0
+Summary: Generic web search CLI with DDGS, engine fallback, and site preferences
+Author: Drupal Tools Contributors
+License: GPL-2.0
+Project-URL: Homepage, https://github.com/drupaltools/tools
+Project-URL: Documentation, https://github.com/drupaltools/tools#readme
+Project-URL: Repository, https://github.com/drupaltools/tools
+Project-URL: Issues, https://github.com/drupaltools/tools/issues
+Keywords: drupal,search,web,ddgs,cli
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: GNU General Public License v2 (GPLv2)
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Topic :: Internet :: WWW/HTTP :: Indexing/Search
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Requires-Dist: ddgs>=9.0.0
+Requires-Dist: tomli>=2.0.1; python_version < "3.11"
+Provides-Extra: dev
+Requires-Dist: pytest>=8.3; extra == "dev"
+Requires-Dist: ruff>=0.2; extra == "dev"
+
+# Drupal Web Search
+
+Generic web search CLI using DDGS with configurable engines, fallback order, and site preferences.
+
+## Setup
+
+```bash
+cd packages/python/drupal-web-search
+python3 -m venv venv
+source venv/bin/activate
+pip install -e .[dev]
+cp .env.example .env
+cp config.toml config.local.toml
+```
+
+## Usage
+
+```bash
+drupal-web-search "drupal cache tags"
+drupal-web-search "drupal cache tags" --engine brave --limit 5
+drupal-web-search "drupal cache tags" --json
+drupal-web-search "drupal cache tags" --verbose
+```
+
+## Config
+
+`config.toml` controls default engine selection, fallback order, search defaults, and preferred/blocked domains.
+
+Environment variables can be referenced with `${VAR_NAME}` values inside `config.toml`.
+
+## Output
+
+Each result includes:
+
+- title
+- url
+- snippet
+- engine

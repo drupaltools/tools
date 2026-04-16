@@ -1,0 +1,190 @@
+name: Release
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      packages:
+        description: 'Comma-separated package paths to release (default: all)'
+        required: false
+        type: string
+
+env:
+  TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+  TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+
+jobs:
+  version:
+    name: Version Bump
+    runs-on: ubuntu-latest
+    outputs:
+      has_changesets: ${{ steps.changesets.outputs.has_changesets }}
+      changed_packages: ${{ steps.changesets.outputs.changed_packages }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Detect changesets
+        id: changesets
+        uses: changesets/action@v1
+        with:
+          publish: echo "Publishing..."
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  publish-npm:
+    name: Publish npm
+    needs: [version]
+    runs-on: ubuntu-latest
+    if: needs.version.outputs.has_changesets == 'true'
+    environment:
+      name: npm
+      url: https://npmjs.org
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build packages
+        run: pnpm turbo run build --filter='@monorepo/*' --color
+
+      - name: Publish to npm
+        run: pnpm turbo run publish --filter='@monorepo/*'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+  publish-composer:
+    name: Publish Composer
+    needs: [version]
+    runs-on: ubuntu-latest
+    if: needs.version.outputs.has_changesets == 'true'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mbstring, xml
+
+      - name: Publish to Packagist
+        run: |
+          cd packages/php/example-package
+          composer config repositories.local --json '{"type":"path","url":"../","options":{"versions":{"@monorepo/example-package":"0.1.0"}}}'
+          composer remove @monorepo/example-package --no-update 2>/dev/null || true
+
+  publish-python:
+    name: Publish PyPI
+    needs: [version]
+    runs-on: ubuntu-latest
+    if: needs.version.outputs.has_changesets == 'true'
+    environment:
+      name: pypi
+      url: https://pypi.org
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v4
+
+      - name: Build and publish
+        run: |
+          cd packages/python/example-package
+          uv build
+          uv publish --token ${{ secrets.PYPI_TOKEN }}
+
+  publish-go:
+    name: Publish Go
+    needs: [version]
+    runs-on: ubuntu-latest
+    if: needs.version.outputs.has_changesets == 'true'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.22'
+
+      - name: Create Go module
+        run: |
+          cd packages/go/example-package
+          VERSION=$(git describe --tags --abbrev=0)
+          git tag "example-package/v$VERSION"
+          git push origin "example-package/v$VERSION"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  publish-rust:
+    name: Publish crates.io
+    needs: [version]
+    runs-on: ubuntu-latest
+    if: needs.version.outputs.has_changesets == 'true'
+    environment:
+      name: crates-io
+      url: https://crates.io
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@v1
+        with:
+          toolchain: stable
+
+      - name: Publish to crates.io
+        run: |
+          cd packages/rust/example-package
+          cargo publish
+        env:
+          CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN }}
+
+  post-release:
+    name: Post Release
+    needs: [publish-npm, publish-composer, publish-python, publish-go, publish-rust]
+    runs-on: ubuntu-latest
+    if: always()
+    steps:
+      - name: Summary
+        run: |
+          echo "## Release Summary" >> $GITHUB_STEP_SUMMARY
+          echo "Released packages: ${{ needs.version.outputs.changed_packages }}" >> $GITHUB_STEP_SUMMARY

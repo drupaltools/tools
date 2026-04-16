@@ -1,0 +1,13 @@
+dist
+build
+target
+vendor
+node_modules
+coverage
+.turbo
+*.lock
+package-lock.json
+pnpm-lock.yaml
+composer.lock
+poetry.lock
+Cargo.lock

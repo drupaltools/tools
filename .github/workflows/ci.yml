@@ -1,0 +1,349 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+  merge_group:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  PNPM_CACHE_FOLDER: .pnpm-store
+  TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+  TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+
+jobs:
+  # ============================================================
+  # QUALITY CHECKS (runs once, no matrix)
+  # ============================================================
+  quality:
+    name: Quality Checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Check formatting
+        run: pnpm turbo run format:check --color
+
+      - name: Lint
+        run: pnpm turbo run lint --color
+
+      - name: Type check
+        run: pnpm turbo run typecheck --color
+
+  # ============================================================
+  # PHP (8.1, 8.2, 8.3)
+  # ============================================================
+  php:
+    name: PHP ${{ matrix.php-version }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php-version: ['8.1', '8.2', '8.3']
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+          extensions: mbstring, xml, ctype, iconv
+          coverage: xdebug
+
+      - name: Cache Composer
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.composer/cache/files
+            packages/php/example-package/vendor
+          key: php-${{ matrix.php-version }}-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            php-${{ matrix.php-version }}-
+
+      - name: Install Composer dependencies
+        working-directory: packages/php/example-package
+        run: |
+          composer install --prefer-dist --no-progress
+          composer validate --strict
+
+      - name: PHPStan
+        working-directory: packages/php/example-package
+        run: composer lint
+
+      - name: Run tests
+        working-directory: packages/php/example-package
+        run: composer test
+
+  # ============================================================
+  # Node.js (18, 20)
+  # ============================================================
+  node:
+    name: Node.js ${{ matrix.node-version }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: ['18', '20']
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build
+        working-directory: packages/js/example-package
+        run: pnpm build
+
+      - name: Run tests
+        working-directory: packages/js/example-package
+        run: pnpm test
+
+      - name: Upload coverage
+        uses: actions/upload-artifact@v4
+        with:
+          name: node-coverage-${{ matrix.node-version }}
+          path: packages/js/example-package/coverage/
+
+  # ============================================================
+  # Python (3.10, 3.11, 3.12)
+  # ============================================================
+  python:
+    name: Python ${{ matrix.python-version }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ['3.10', '3.11', '3.12']
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v4
+
+      - name: Install Poetry
+        uses: py actions/setup-poetry@v1
+        with:
+          poetry-version: 1.8
+
+      - name: Cache Poetry
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/pypoetry
+            packages/python/example-package/.venv
+          key: python-${{ matrix.python-version }}-${{ hashFiles('**/poetry.lock') }}
+          restore-keys: |
+            python-${{ matrix.python-version }}-
+
+      - name: Install dependencies
+        working-directory: packages/python/example-package
+        run: poetry install
+
+      - name: Lint with ruff
+        working-directory: packages/python/example-package
+        run: poetry run ruff check .
+
+      - name: Type check with mypy
+        working-directory: packages/python/example-package
+        run: poetry run mypy src/example_package
+
+      - name: Run tests
+        working-directory: packages/python/example-package
+        run: poetry run pytest
+
+  drupal-news:
+    name: Python drupal-news ${{ matrix.python-version }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ['3.10', '3.11', '3.12']
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v4
+
+      - name: Setup Poetry
+        uses: snok/install-poetry@v1
+        with:
+          version: 1.8.5
+
+      - name: Cache Poetry
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/pypoetry
+            packages/python/drupal-news/.venv
+          key: python-drupal-news-${{ matrix.python-version }}-${{ hashFiles('packages/python/drupal-news/pyproject.toml') }}
+          restore-keys: |
+            python-drupal-news-${{ matrix.python-version }}-
+
+      - name: Create virtual environment
+        working-directory: packages/python/drupal-news
+        run: uv venv .venv
+
+      - name: Install dependencies
+        working-directory: packages/python/drupal-news
+        run: .venv/bin/pip install -e ".[dev]"
+
+      - name: Lint with ruff
+        working-directory: packages/python/drupal-news
+        run: .venv/bin/ruff check src/
+
+      - name: Type check with mypy
+        working-directory: packages/python/drupal-news
+        run: .venv/bin/mypy src/
+
+      - name: Run tests
+        working-directory: packages/python/drupal-news
+        run: .venv/bin/pytest src/tests/
+
+  # ============================================================
+  # Go (1.21, 1.22)
+  # ============================================================
+  go:
+    name: Go ${{ matrix.go-version }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        go-version: ['1.21', '1.22']
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: ${{ matrix.go-version }}
+          cache-dependency-path: packages/go/example-package/go.sum
+
+      - name: Cache Go modules
+        uses: actions/cache@v4
+        with:
+          path: ~/go/pkg/mod
+          key: go-${{ matrix.go-version }}-${{ hashFiles('**/go.sum') }}
+          restore-keys: |
+            go-${{ matrix.go-version }}-
+
+      - name: Install golangci-lint
+        uses: golangci-lint/golangci-lint-action@v6
+        with:
+          version: latest
+          working-directory: packages/go/example-package
+
+      - name: Lint
+        working-directory: packages/go/example-package
+        run: make lint
+
+      - name: Build
+        working-directory: packages/go/example-package
+        run: make build
+
+      - name: Run tests
+        working-directory: packages/go/example-package
+        run: make test
+
+  # ============================================================
+  # Rust (stable, 1.77)
+  # ============================================================
+  rust:
+    name: Rust ${{ matrix.rust-version }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        rust-version: ['stable', '1.77']
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@v1
+        with:
+          toolchain: ${{ matrix.rust-version }}
+          components: rustfmt, clippy
+
+      - name: Cache Cargo
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: packages/rust/example-package
+
+      - name: Check formatting
+        working-directory: packages/rust/example-package
+        run: cargo fmt --check
+
+      - name: Clippy
+        working-directory: packages/rust/example-package
+        run: cargo clippy -- -D warnings
+
+      - name: Build
+        working-directory: packages/rust/example-package
+        run: cargo build
+
+      - name: Run tests
+        working-directory: packages/rust/example-package
+        run: cargo test
+
+      - name: Run tests with output
+        working-directory: packages/rust/example-package
+        run: cargo test -- --nocapture
+
+  # ============================================================
+  # SUMMARY (runs after all matrix jobs)
+  # ============================================================
+  summary:
+    name: CI Summary
+    needs: [quality, php, node, python, go, rust]
+    runs-on: ubuntu-latest
+    if: always()
+    steps:
+      - name: Check for failures
+        run: |
+          if [[ "${{ contains(needs.*.result, 'failure') }}" == "true" ]]; then
+            echo "One or more jobs failed."
+            exit 1
+          fi
+          echo "All jobs passed!"

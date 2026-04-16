@@ -1,0 +1,83 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "drupal-web-search"
+version = "0.1.0"
+description = "Generic web search CLI with DDGS, Exa, Tavily, Perplexity, engine fallback, and site preferences"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "GPL-2.0" }
+authors = [
+    { name = "Drupal Tools Contributors" },
+]
+keywords = ["drupal", "search", "web", "ddgs", "cli"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: GNU General Public License v2 (GPLv2)",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Internet :: WWW/HTTP :: Indexing/Search",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dependencies = [
+    "ddgs>=9.0.0",
+    "tomli>=2.0.1; python_version < '3.11'",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.3",
+    "ruff>=0.2",
+]
+exa = ["exa-py>=1.0"]
+tavily = ["tavily-python>=0.4"]
+perplexity = ["perplexityai>=0.8"]
+firecrawl = ["firecrawl-py>=1.0"]
+serpapi = ["serpapi>=0.1"]
+premium = ["exa-py>=1.0", "tavily-python>=0.4", "perplexityai>=0.8", "firecrawl-py>=1.0", "serpapi>=0.1"]
+
+[project.urls]
+Homepage = "https://github.com/drupaltools/tools"
+Documentation = "https://github.com/drupaltools/tools#readme"
+Repository = "https://github.com/drupaltools/tools"
+Issues = "https://github.com/drupaltools/tools/issues"
+
+[project.scripts]
+drupal-web-search = "drupal_web_search.cli:main"
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages]
+find = { where = ["src"], include = ["drupal_web_search*"] }
+
+[tool.setuptools.package-data]
+drupal_web_search = ["config.toml"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "W", "F", "I", "B", "C4", "UP"]
+ignore = ["E501"]
+
+[tool.ruff.format]
+quote-style = "double"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+
+[tool.pyright]
+include = ["src", "tests"]
+extraPaths = ["src"]
+pythonVersion = "3.10"

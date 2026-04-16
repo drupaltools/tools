@@ -1,0 +1,7 @@
+packages:
+  - "packages/*"
+  - "packages/php/*"
+  - "packages/js/*"
+  - "packages/python/*"
+  - "packages/go/*"
+  - "packages/rust/*"

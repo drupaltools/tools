@@ -1,0 +1,48 @@
+[package]
+name = "example-package"
+version = "0.1.0"
+edition = "2021"
+authors = ["Monorepo Team <team@monorepo.dev>"]
+license = "MIT"
+description = "Example Rust crate from polyglot monorepo"
+repository = "https://github.com/drupaltools/tools/packages/rust/example-package"
+keywords = ["example", "monorepo"]
+categories = ["development-tools"]
+rust-version = "1.77"
+readme = "README.md"
+
+[lib]
+name = "example_package"
+path = "src/lib.rs"
+
+[[bin]]
+name = "example-package"
+path = "examples/cli.rs"
+required-features = ["cli"]
+
+[dependencies]
+clap = { version = "4", features = ["derive"], optional = true }
+
+[dev-dependencies]
+criterion = { version = "0.5", features = ["html_reports"] }
+pretty_assertions = "1.4"
+proptest = "1.4"
+
+[features]
+default = []
+cli = ["clap"]
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+strip = true
+
+[profile.dev]
+opt-level = 0
+debug = true
+
+[[bench]]
+name = "example_package_bench"
+harness = false
+path = "benches/benches.rs"

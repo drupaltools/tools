@@ -1,0 +1,27 @@
+[engines]
+default = "duckduckgo"
+fallback_order = ["brave", "google", "bing"]
+
+[engines.duckduckgo]
+enabled = true
+
+[engines.brave]
+api_key = "${BRAVE_API_KEY}"
+enabled = true
+
+[engines.google]
+api_key = "${GOOGLE_API_KEY}"
+enabled = false
+
+[engines.bing]
+api_key = "${BING_API_KEY}"
+enabled = true
+
+[search]
+num_results = 10
+safe_search = "moderate"
+timeout = 30
+
+[site_preferences]
+preferred = ["github.com", "stackoverflow.com"]
+blocked = ["spam-site.com"]

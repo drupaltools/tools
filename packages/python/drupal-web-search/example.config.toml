@@ -1,0 +1,62 @@
+[engines]
+# Default engine (must match one of the engine keys below)
+default = "duckduckgo"
+
+# Engines to try if the default fails (in order)
+fallback_order = ["brave", "exa", "tavily"]
+
+[engines.duckduckgo]
+enabled = true
+
+[engines.brave]
+# Get API key at: https://api-dashboard.search.brave.com/register
+api_key = "${BRAVE_API_KEY}"
+enabled = true
+
+[engines.google]
+# Uses DDGS scraper (no API key needed)
+enabled = true
+
+[engines.bing]
+# Uses DDGS scraper (no API key needed)
+enabled = false
+
+[engines.exa]
+# Get API key at: https://dashboard.exa.ai/onboarding
+api_key = "${EXA_API_KEY}"
+enabled = false
+
+[engines.tavily]
+# Get API key at: https://tavily.com
+api_key = "${TAVILY_API_KEY}"
+enabled = false
+
+[engines.perplexity]
+# Get API key at: https://api.perplexity.ai/api-keys
+api_key = "${PERPLEXITY_API_KEY}"
+enabled = false
+
+[engines.firecrawl]
+# Get API key at: https://firecrawl.dev/app/api-keys
+api_key = "${FIRECRAWL_API_KEY}"
+enabled = false
+
+[engines.serpapi]
+# Get API key at: https://serpapi.com/users/sign_up
+api_key = "${SERPAPI_API_KEY}"
+enabled = false
+
+[search]
+num_results = 10
+safe_search = "moderate"  # on, moderate, off
+timeout = 30             # seconds
+
+[site_preferences]
+# Only return results from these domains (added as site:domain to query)
+restrict_to = []
+
+# These domains bubble to top of results (after search)
+preferred = []
+
+# These domains are removed from results (after search)
+blocked = []

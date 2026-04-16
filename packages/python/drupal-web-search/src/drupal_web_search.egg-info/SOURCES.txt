@@ -1,0 +1,15 @@
+README.md
+pyproject.toml
+src/drupal_web_search/__init__.py
+src/drupal_web_search/cli.py
+src/drupal_web_search/config.py
+src/drupal_web_search/config.toml
+src/drupal_web_search/search.py
+src/drupal_web_search.egg-info/PKG-INFO
+src/drupal_web_search.egg-info/SOURCES.txt
+src/drupal_web_search.egg-info/dependency_links.txt
+src/drupal_web_search.egg-info/entry_points.txt
+src/drupal_web_search.egg-info/requires.txt
+src/drupal_web_search.egg-info/top_level.txt
+tests/test_config.py
+tests/test_search.py

@@ -1,0 +1,53 @@
+{
+    "name": "tplcom/stand-with-cyprus",
+    "description": "Stand with Cyprus",
+    "keywords": [
+        "politics",
+        "war",
+        "cyprus"
+    ],
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "tplcom"
+        }
+    ],
+    "require": {
+        "php": "^7.4|^8.0|^8.1",
+        "symfony/console": "^5.4|^6.0"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.8",
+        "bamarni/composer-bin-plugin": "^1.8",
+        "phpstan/phpstan": "^1.10",
+        "phpunit/phpunit": "^9.5"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "StandWithCyprus\\": "src/"
+        }
+    },
+    "bin": [
+        "bin/stand-with-cyprus"
+    ],
+    "scripts": {
+        "php-cs-fixer": "php-cs-fixer fix --diff",
+        "phpstan": "phpstan analyse",
+        "test": "php run-tests.php",
+        "build": "rm -rf bin/* && box compile"
+    },
+    "extra": {
+        "bamarni-bin": {
+            "bin-links": false,
+            "forward-command": true
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "bamarni/composer-bin-plugin": true
+        }
+    }
+}

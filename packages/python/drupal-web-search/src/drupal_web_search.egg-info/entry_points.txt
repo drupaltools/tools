@@ -1,0 +1,2 @@
+[console_scripts]
+drupal-web-search = drupal_web_search.cli:main

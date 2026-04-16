@@ -1,0 +1,132 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "drupal-news"
+dynamic = ["version"]
+description = "Automated Drupal news aggregator with AI-powered summaries"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "GPL-2.0"}
+authors = [
+    {name = "Drupal News Contributors"},
+]
+keywords = [
+    "drupal",
+    "news",
+    "aggregator",
+    "rss",
+    "ai",
+    "summarizer",
+    "newsletter",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: System Administrators",
+    "License :: OSI Approved :: GNU General Public License v2 (GPLv2)",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Communications :: Email",
+    "Topic :: Internet :: WWW/HTTP :: Dynamic Content :: News/Diary",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Text Processing :: Markup :: HTML",
+]
+
+dependencies = [
+    "python-dotenv>=1.0",
+    "httpx>=0.27",
+    "feedparser>=6.0",
+    "lxml>=5.3",
+    "readability-lxml>=0.8",
+    "beautifulsoup4>=4.12",
+    "python-dateutil>=2.9",
+    "pytz>=2024.1",
+    "apscheduler>=3.10",
+    "jsonschema>=4.23",
+    "sqlite-utils>=3.36",
+    "loguru>=0.7",
+    "pyyaml>=6.0",
+    "flask>=3.0",
+    "markdown>=3.5",
+    "weasyprint>=66.0",
+    "libsass>=0.23",
+    "watchdog>=4.0",
+]
+
+[project.optional-dependencies]
+# AI provider SDKs - install as needed
+openai = ["openai>=1.45"]
+anthropic = ["anthropic>=0.34"]
+google = ["google-generativeai>=0.7"]
+qwen = ["dashscope>=1.17"]
+grok = ["xai-sdk>=0.3"]
+deepseek = ["deepseek>=0.2"]
+
+# Install all AI providers
+all-providers = [
+    "openai>=1.45",
+    "anthropic>=0.34",
+    "google-generativeai>=0.7",
+    "dashscope>=1.17",
+]
+
+# Development dependencies
+dev = [
+    "pytest>=8.3",
+    "pytest-cov>=4.1",
+    "ruff>=0.2",
+    "mypy>=1.8",
+    "build>=1.0",
+    "twine>=5.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/drupaltools/tools"
+Documentation = "https://github.com/drupaltools/tools#readme"
+Repository = "https://github.com/drupaltools/tools"
+Issues = "https://github.com/drupaltools/tools/issues"
+Changelog = "https://github.com/drupaltools/tools/blob/main/CHANGELOG.md"
+
+[project.scripts]
+drupal-news = "drupal_news.cli:main"
+drupal-news-scheduler = "drupal_news.cli:scheduler_main"
+drupal-news-email = "drupal_news.cli:email_main"
+drupal-news-viewer = "drupal_news.cli:viewer_main"
+
+[tool.setuptools.packages]
+find = {where = ["src"], include = ["drupal_news*"]}
+include-package-data = true
+
+[tool.setuptools.dynamic]
+version = {file = "VERSION"}
+
+[tool.setuptools.package-data]
+drupal_news = ["*.yaml", "*.json", "static/**/*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "W", "F", "I", "B", "C4", "UP"]
+ignore = ["E501"]
+
+[tool.ruff.format]
+quote-style = "double"
+
+[tool.pytest.ini_options]
+testpaths = ["src/tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false

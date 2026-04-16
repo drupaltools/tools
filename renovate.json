@@ -1,0 +1,17 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended"],
+  "labels": ["dependencies"],
+  "packageRules": [
+    {
+      "matchPackagePatterns": ["*"],
+      "groupName": "all dependencies"
+    },
+    {
+      "matchPackageNames": ["turbo", "@changesets/cli"],
+      "groupName": "monorepo tools",
+      "schedule": ["every weekend"]
+    }
+  ],
+  "timezone": "Europe/Athens"
+}

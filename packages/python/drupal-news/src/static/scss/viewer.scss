@@ -1,0 +1,406 @@
+// Drupal Weekly Viewer Styles
+// Variables
+$primary-color: #0050BC;
+$secondary-color: #333;
+$background-color: #f5f5f5;
+$text-color: #333;
+$border-color: #ddd;
+$link-color: #0050BC;
+$link-hover-color: #004875;
+
+$font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+$font-size-base: 18px;
+$line-height-base: 1.6;
+
+$spacing-xs: 0.25rem;
+$spacing-sm: 0.5rem;
+$spacing-md: 1rem;
+$spacing-lg: 1.5rem;
+$spacing-xl: 2rem;
+
+$border-radius: 4px;
+$box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+// Mixins
+@mixin transition($properties...) {
+  transition: $properties;
+}
+
+@mixin box-shadow($shadow) {
+  box-shadow: $shadow;
+}
+
+// Base styles
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: $font-family;
+  font-size: $font-size-base;
+  line-height: $line-height-base;
+  color: $text-color;
+  background-color: $background-color;
+}
+
+ul {
+  list-style-position: inside;
+}
+
+li {
+  list-style: none;
+  list-style-position: inside;
+  margin-bottom: 1em;
+
+  &::before {
+    content: "";
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin-right: 10px;
+    background-color: $link-color;
+    border-radius: 50%;
+    vertical-align: middle;
+  }
+
+  p {
+    margin: 0;
+    display: inline;
+  }
+}
+
+select {
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+label {
+  font-weight: bold;
+}
+
+// Header
+header {
+  background-color: $primary-color;
+  color: white;
+  padding: $spacing-lg;
+  @include box-shadow($box-shadow);
+
+  h1 {
+    margin: 0;
+    font-size: 1.75rem;
+  }
+
+  nav {
+    margin-top: $spacing-md;
+
+    a {
+      color: white;
+      text-decoration: none;
+      margin-right: $spacing-md;
+      @include transition(opacity 0.3s);
+
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+  }
+}
+
+// Main container
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: $spacing-lg;
+}
+
+// Run selector
+.run-selector {
+  margin-bottom: $spacing-lg;
+  padding: $spacing-md;
+  background: white;
+  border-radius: $border-radius;
+  @include box-shadow($box-shadow);
+
+  select {
+    padding: $spacing-sm $spacing-md;
+    font-size: 1rem;
+    border: 1px solid $border-color;
+    border-radius: $border-radius;
+    min-width: 200px;
+  }
+}
+
+// View mode toggle
+.view-toggle {
+  margin-bottom: $spacing-lg;
+
+  button {
+    padding: $spacing-sm $spacing-md;
+    margin-right: $spacing-sm;
+    background-color: white;
+    border: 1px solid $border-color;
+    border-radius: $border-radius;
+    cursor: pointer;
+    @include transition(all 0.3s);
+
+    &:hover {
+      background-color: $background-color;
+    }
+
+    &.active {
+      background-color: $primary-color;
+      color: white;
+      border-color: $primary-color;
+    }
+  }
+}
+
+// Tabs view
+.tabs {
+  margin-bottom: $spacing-md;
+  display: flex;
+
+  .tab {
+    display: flex;
+    gap: $spacing-xs;
+    border-bottom: 2px solid $border-color;
+    padding: $spacing-md $spacing-lg;
+    background: white;
+    border: none;
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+    font-size: 1rem;
+    @include transition(all 0.3s);
+
+    &:hover {
+      background-color: $background-color;
+    }
+
+    &.active {
+      border-bottom-color: $primary-color;
+      color: $primary-color;
+      font-weight: 600;
+    }
+  }
+}
+
+.tab-content {
+  background: white;
+  padding: $spacing-lg;
+  border-radius: 0 0 $border-radius $border-radius;
+  @include box-shadow($box-shadow);
+  display: none;
+
+  &.active {
+    display: block;
+  }
+}
+
+// Markdown content
+.markdown-content {
+  max-width: 960px;
+
+  h1, h2, h3, h4, h5, h6 {
+    margin-top: $spacing-lg;
+    margin-bottom: $spacing-md;
+    color: $secondary-color;
+  }
+
+  h1 { font-size: 2rem; }
+  h2 { font-size: 1.5rem; }
+  h3 { font-size: 1.25rem; }
+
+  p {
+    margin-bottom: $spacing-md;
+  }
+
+  a {
+    color: $link-color;
+    text-decoration: none;
+    @include transition(color 0.3s);
+
+    &:hover {
+      color: $link-hover-color;
+      text-decoration: underline;
+    }
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: $spacing-lg 0;
+    @include box-shadow($box-shadow);
+
+    thead {
+      background-color: $primary-color;
+      color: white;
+
+      th {
+        padding: $spacing-md;
+        text-align: left;
+        font-weight: 600;
+        border-bottom: 2px solid;
+      }
+    }
+
+    tbody {
+      tr {
+        border-bottom: 1px solid $border-color;
+        @include transition(background-color 0.2s);
+
+        &:hover {
+          background-color: $background-color;
+        }
+
+        td {
+          border: 1px solid;
+          padding: $spacing-md;
+
+          a {
+            word-break: break-all;
+          }
+        }
+      }
+    }
+  }
+
+  code {
+    background-color: $background-color;
+    padding: $spacing-xs $spacing-sm;
+    border-radius: $border-radius;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+  }
+
+  pre {
+    background-color: $secondary-color;
+    color: white;
+    padding: $spacing-md;
+    border-radius: $border-radius;
+    overflow-x: auto;
+    margin: $spacing-md 0;
+
+    code {
+      background: none;
+      padding: 0;
+      color: white;
+    }
+  }
+}
+
+// Metrics display
+.metrics {
+  background: white;
+  padding: $spacing-lg;
+  border-radius: $border-radius;
+  @include box-shadow($box-shadow);
+  margin-top: $spacing-lg;
+
+  h3 {
+    margin-bottom: $spacing-md;
+    color: $primary-color;
+  }
+
+  .metric-item {
+    display: flex;
+    justify-content: space-between;
+    padding: $spacing-sm 0;
+    border-bottom: 1px solid $border-color;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    .label {
+      font-weight: 600;
+    }
+
+    .value {
+      color: $secondary-color;
+    }
+  }
+}
+
+// Logs display
+.logs {
+  background: $secondary-color;
+  color: white;
+  padding: $spacing-lg;
+  border-radius: $border-radius;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9rem;
+  overflow-x: auto;
+  max-height: 400px;
+  overflow-y: auto;
+  margin-top: $spacing-lg;
+
+  .log-line {
+    margin-bottom: $spacing-xs;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+}
+
+// Error page
+.error-page {
+  text-align: center;
+  padding: $spacing-xl;
+
+  h1 {
+    font-size: 3rem;
+    color: $primary-color;
+    margin-bottom: $spacing-md;
+  }
+
+  p {
+    font-size: 1.25rem;
+    color: $secondary-color;
+    margin-bottom: $spacing-lg;
+  }
+
+  a {
+    display: inline-block;
+    padding: $spacing-md $spacing-lg;
+    background-color: $primary-color;
+    color: white;
+    text-decoration: none;
+    border-radius: $border-radius;
+    @include transition(background-color 0.3s);
+
+    &:hover {
+      background-color: $link-hover-color;
+    }
+  }
+}
+
+// Footer
+footer {
+  text-align: center;
+  padding: $spacing-lg;
+  color: $secondary-color;
+  font-size: 0.9rem;
+  margin-top: $spacing-xl;
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .split-view {
+    grid-template-columns: 1fr;
+
+    .panel {
+      max-height: 50vh;
+    }
+  }
+
+  header {
+    h1 {
+      font-size: 1.5rem;
+    }
+  }
+
+  .container {
+    padding: $spacing-md;
+  }
+}
