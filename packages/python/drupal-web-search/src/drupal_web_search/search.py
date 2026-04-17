@@ -25,7 +25,7 @@ except ImportError:
     _TAVILY_AVAILABLE = False
 
 try:
-    import perplexityai  # pyright: ignore[reportMissingImports]
+    import perplexity  # pyright: ignore[reportMissingImports]
 
     _PERPLEXITY_AVAILABLE = True
 except ImportError:
@@ -44,6 +44,20 @@ try:
     _SERPAPI_AVAILABLE = True
 except ImportError:
     _SERPAPI_AVAILABLE = False
+
+try:
+    from linkup import LinkupClient  # pyright: ignore[reportMissingImports]
+
+    _LINKUP_AVAILABLE = True
+except ImportError:
+    _LINKUP_AVAILABLE = False
+
+try:
+    import httpx
+
+    _JINA_AVAILABLE = True
+except ImportError:
+    _JINA_AVAILABLE = False
 
 
 @dataclass(frozen=True)
@@ -110,7 +124,7 @@ def normalize_results(raw_results: list[dict[str, str]], engine: str) -> list[Se
     return normalized_results
 
 
-def _run_engine(engine: str, query: str, limit: int, config: AppConfig) -> list[SearchResult]:
+def _run_engine(engine: str, query: str, limit: int, config: AppConfig, sites: tuple[str, ...] = ()) -> list[SearchResult]:
     if engine == "duckduckgo":
         return _search_ddgs(query, limit, config)
     if engine == "brave":
@@ -119,6 +133,8 @@ def _run_engine(engine: str, query: str, limit: int, config: AppConfig) -> list[
         return _search_ddgs(query, limit, config, backend="google")
     if engine == "bing":
         return _search_ddgs(query, limit, config, backend="bing")
+    if engine == "yahoo":
+        return _search_ddgs(query, limit, config, backend="yahoo")
     if engine == "exa":
         return _search_exa(query, limit, config)
     if engine == "tavily":
@@ -129,6 +145,10 @@ def _run_engine(engine: str, query: str, limit: int, config: AppConfig) -> list[
         return _search_firecrawl(query, limit, config)
     if engine == "serpapi":
         return _search_serpapi(query, limit, config)
+    if engine == "linkup":
+        return _search_linkup(query, limit, config)
+    if engine == "jina":
+        return _search_jina(query, limit, config, sites)
     raise ValueError(f"Unknown engine: {engine}")
 
 
@@ -147,10 +167,10 @@ def _search_ddgs(
 
 def _search_exa(query: str, limit: int, config: AppConfig) -> list[SearchResult]:
     if not _EXA_AVAILABLE:
-        raise ImportError("exa-py not installed. Run: pip install drupal-web-search[exa]")
+        raise ImportError("exa-py is not available. Please ensure drupal-web-search is installed correctly.")
     api_key = config.engines.get("exa", EngineSettings(name="exa", enabled=False)).api_key
     if not api_key:
-        raise ValueError("EXA_API_KEY is required for the exa engine.")
+        raise ValueError("EXA_API_KEY is required for the exa engine. Add it to config.toml or set the environment variable.")
     client = Exa(api_key)
     results = client.search(query, num_results=limit)
     return [
@@ -166,10 +186,10 @@ def _search_exa(query: str, limit: int, config: AppConfig) -> list[SearchResult]
 
 def _search_tavily(query: str, limit: int, config: AppConfig) -> list[SearchResult]:
     if not _TAVILY_AVAILABLE:
-        raise ImportError("tavily-python not installed. Run: pip install drupal-web-search[tavily]")
+        raise ImportError("tavily-python is not available. Please ensure drupal-web-search is installed correctly.")
     api_key = config.engines.get("tavily", EngineSettings(name="tavily", enabled=False)).api_key
     if not api_key:
-        raise ValueError("TAVILY_API_KEY is required for the tavily engine.")
+        raise ValueError("TAVILY_API_KEY is required for the tavily engine. Add it to config.toml or set the environment variable.")
     client = TavilyClient(api_key=api_key)
     response = client.search(query, max_results=limit)
     return [
@@ -185,38 +205,33 @@ def _search_tavily(query: str, limit: int, config: AppConfig) -> list[SearchResu
 
 def _search_perplexity(query: str, limit: int, config: AppConfig) -> list[SearchResult]:
     if not _PERPLEXITY_AVAILABLE:
-        raise ImportError(
-            "perplexityai not installed. Run: pip install drupal-web-search[perplexity]"
-        )
+        raise ImportError("perplexity is not available. Please ensure drupal-web-search is installed correctly.")
     api_key = config.engines.get(
         "perplexity", EngineSettings(name="perplexity", enabled=False)
     ).api_key
     if not api_key:
-        raise ValueError("PERPLEXITY_API_KEY is required for the perplexity engine.")
-    client = perplexityai.PerplexityAPI(api_key=api_key)
-    resp = client.search(query, num_results=limit)
-    results = resp.get("results", [])
+        raise ValueError("PERPLEXITY_API_KEY is required for the perplexity engine. Add it to config.toml or set the environment variable.")
+    client = perplexity.Perplexity(api_key=api_key)
+    response = client.search.create(query=query, max_results=limit)
     return [
         SearchResult(
-            title=r.get("title", ""),
-            url=r.get("url", ""),
-            snippet=r.get("description", ""),
+            title=r.title,
+            url=r.url,
+            snippet=r.snippet,
             engine="perplexity",
         )
-        for r in results
+        for r in response.results
     ]
 
 
 def _search_firecrawl(query: str, limit: int, config: AppConfig) -> list[SearchResult]:
     if not _FIRECRAWL_AVAILABLE:
-        raise ImportError(
-            "firecrawl-py not installed. Run: pip install drupal-web-search[firecrawl]"
-        )
+        raise ImportError("firecrawl-py is not available. Please ensure drupal-web-search is installed correctly.")
     api_key = config.engines.get(
         "firecrawl", EngineSettings(name="firecrawl", enabled=False)
     ).api_key
     if not api_key:
-        raise ValueError("FIRECRAWL_API_KEY is required for the firecrawl engine.")
+        raise ValueError("FIRECRAWL_API_KEY is required for the firecrawl engine. Add it to config.toml or set the environment variable.")
     client = firecrawl.FirecrawlApp(api_key=api_key)
     resp = client.search(query, limit=limit)
     results = resp.get("data", []) if isinstance(resp, dict) else []
@@ -233,10 +248,10 @@ def _search_firecrawl(query: str, limit: int, config: AppConfig) -> list[SearchR
 
 def _search_serpapi(query: str, limit: int, config: AppConfig) -> list[SearchResult]:
     if not _SERPAPI_AVAILABLE:
-        raise ImportError("serpapi not installed. Run: pip install drupal-web-search[serpapi]")
+        raise ImportError("serpapi is not available. Please ensure drupal-web-search is installed correctly.")
     api_key = config.engines.get("serpapi", EngineSettings(name="serpapi", enabled=False)).api_key
     if not api_key:
-        raise ValueError("SERPAPI_API_KEY is required for the serpapi engine.")
+        raise ValueError("SERPAPI_API_KEY is required for the serpapi engine. Add it to config.toml or set the environment variable.")
     client = serpapi.SerpAPIClient(api_key=api_key)
     resp = client.search({"q": query, "num": limit})
     results = resp.get("organic_results", [])
@@ -246,6 +261,62 @@ def _search_serpapi(query: str, limit: int, config: AppConfig) -> list[SearchRes
             url=r.get("link", ""),
             snippet=r.get("snippet", ""),
             engine="serpapi",
+        )
+        for r in results
+    ]
+
+
+def _search_linkup(query: str, limit: int, config: AppConfig) -> list[SearchResult]:
+    if not _LINKUP_AVAILABLE:
+        raise ImportError("linkup-sdk is not available. Please ensure drupal-web-search is installed correctly.")
+    api_key = config.engines.get("linkup", EngineSettings(name="linkup", enabled=False)).api_key
+    if not api_key:
+        raise ValueError("LINKUP_API_KEY is required for the linkup engine. Add it to config.toml or set the environment variable.")
+    client = LinkupClient(api_key=api_key)
+    include_domains = list(config.site_preferences.restrict_to) if config.site_preferences.restrict_to else None
+    response = client.search(
+        query=query,
+        depth="standard",
+        output_type="searchResults",
+        include_images=False,
+        include_domains=include_domains,
+        max_results=limit,
+    )
+    return [
+        SearchResult(
+            title=r.name or r.url,
+            url=r.url,
+            snippet=r.content or "",
+            engine="linkup",
+        )
+        for r in response.results
+    ]
+
+
+def _search_jina(query: str, limit: int, config: AppConfig, sites: tuple[str, ...] = ()) -> list[SearchResult]:
+    if not _JINA_AVAILABLE:
+        raise ImportError("httpx is required for jina engine. Please ensure drupal-web-search is installed correctly.")
+    api_key = config.engines.get("jina", EngineSettings(name="jina", enabled=False)).api_key
+    if not api_key:
+        raise ValueError("JINA_API_KEY is required for the jina engine. Add it to config.toml or set the environment variable.")
+    headers = {"Authorization": f"Bearer {api_key}", "Accept": "application/json"}
+    params: dict[str, str | int] = {"q": query, "num": limit}
+    if sites:
+        params["site"] = sites[0]
+    response = httpx.get(
+        "https://s.jina.ai/",
+        params=params,
+        headers=headers,
+        timeout=config.search.timeout,
+    )
+    data = response.json()
+    results = data.get("data", []) if isinstance(data.get("data"), list) else []
+    return [
+        SearchResult(
+            title=r.get("title", ""),
+            url=r.get("url", ""),
+            snippet=r.get("description", ""),
+            engine="jina",
         )
         for r in results
     ]
@@ -288,14 +359,16 @@ def search_web(
     cli_sites = site if site else []
     config_sites = config.site_preferences.restrict_to
     all_sites = tuple(s for s in cli_sites) + config_sites
-    if all_sites:
-        site_prefix = " ".join(f"site:{s}" for s in all_sites)
-        query = f"{site_prefix} {query}"
 
     last_error: Exception | None = None
     for engine in engine_order:
+        modified_query = query
+        engines_with_native_site = {"jina", "linkup"}
+        if all_sites and engine not in engines_with_native_site:
+            site_prefix = " ".join(f"site:{s}" for s in all_sites)
+            modified_query = f"{site_prefix} {query}"
         try:
-            raw_results = _run_engine(engine, query, result_limit, config)
+            raw_results = _run_engine(engine, modified_query, result_limit, config, all_sites)
         except Exception as exc:  # pragma: no cover - network/runtime failure path
             last_error = exc
             continue

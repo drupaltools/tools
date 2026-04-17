@@ -1,8 +1,11 @@
 [engines]
 default = "brave"
-fallback_order = ["google", "duckduckgo", "bing"]
+fallback_order = ["google", "yahoo", "duckduckgo", "bing"]
 
 [engines.duckduckgo]
+enabled = true
+
+[engines.yahoo]
 enabled = true
 
 [engines.brave]
@@ -25,15 +28,23 @@ enabled = true
 
 [engines.exa]
 api_key = "${EXA_API_KEY}"
-enabled = false
+enabled = true
 
 [engines.tavily]
 api_key = "${TAVILY_API_KEY}"
-enabled = false
+enabled = true
 
 [engines.serpapi]
 api_key = "${SERPAPI_API_KEY}"
-enabled = false
+enabled = true
+
+[engines.linkup]
+api_key = "${LINKUP_API_KEY}"
+enabled = true
+
+[engines.jina]
+api_key = "${JINA_API_KEY}"
+enabled = true
 
 [search]
 num_results = 10
@@ -41,6 +52,13 @@ safe_search = "moderate"
 timeout = 30
 
 [site_preferences]
-restrict_to = ["drupal.org", "git.drupalcode.org"]
-preferred = ["github.com", "stackoverflow.com"]
+restrict_to = ["drupal.org", "api.drupal.org", "git.drupalcode.org", "drupal.stackexchange.com"]
+preferred = [
+    "github.com",
+    "git.drupalcode.org",
+    "github.com/theodorosploumis/awesome-drupal",
+    "github.com/theodorosploumis/drupal-best-practices",
+    "www.drupalatyourfingertips.com",
+    "www.drupalbook.org",
+]
 blocked = ["spam-site.com"]

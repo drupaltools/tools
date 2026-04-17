@@ -28,6 +28,12 @@ classifiers = [
 dependencies = [
     "ddgs>=9.0.0",
     "tomli>=2.0.1; python_version < '3.11'",
+    "exa-py>=1.0",
+    "tavily-python>=0.4",
+    "perplexityai>=0.8",
+    "firecrawl-py>=1.0",
+    "serpapi>=0.1",
+    "linkup-sdk>=0.2",
 ]
 
 [project.optional-dependencies]
@@ -35,12 +41,6 @@ dev = [
     "pytest>=8.3",
     "ruff>=0.2",
 ]
-exa = ["exa-py>=1.0"]
-tavily = ["tavily-python>=0.4"]
-perplexity = ["perplexityai>=0.8"]
-firecrawl = ["firecrawl-py>=1.0"]
-serpapi = ["serpapi>=0.1"]
-premium = ["exa-py>=1.0", "tavily-python>=0.4", "perplexityai>=0.8", "firecrawl-py>=1.0", "serpapi>=0.1"]
 
 [project.urls]
 Homepage = "https://github.com/drupaltools/tools"

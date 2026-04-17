@@ -8,8 +8,7 @@ Generic web search CLI with DDGS (free), Exa, Tavily, Perplexity, Firecrawl, and
 cd packages/python/drupal-web-search
 python3 -m venv venv
 source venv/bin/activate
-pip install -e .[dev]          # core + dev tools
-pip install -e .[premium]      # add Exa + Tavily + Perplexity + Firecrawl + SerpAPI
+pip install -e .[dev]   # core + dev tools (or just pip install -e . for core only)
 cp .env.example .env
 cp config.toml config.local.toml
 ```
@@ -17,6 +16,10 @@ cp config.toml config.local.toml
 ## Usage
 
 ```bash
+# Activate virtual environment first
+source venv/bin/activate
+
+# Then run (or use .venv/bin/drupal-web-search directly without activating)
 drupal-web-search "drupal cache tags"
 drupal-web-search "drupal cache tags" --engine brave --limit 5
 drupal-web-search "drupal cache tags" --engine exa --limit 5
@@ -24,6 +27,10 @@ drupal-web-search "drupal cache tags" --engine tavily
 drupal-web-search "drupal cache tags" --engine perplexity
 drupal-web-search "drupal cache tags" --json
 drupal-web-search "drupal cache tags" --verbose
+
+# Or run directly without activating
+.venv/bin/drupal-web-search "drupal cache tags" --engine exa
+.venv/bin/python -m drupal_web_search "drupal cache tags" --engine exa
 
 # Restrict to specific domain(s)
 drupal-web-search "cache tags" --site drupal.org
@@ -44,32 +51,36 @@ CLI `--site` flags are combined with `restrict_to` and prepended to every query 
 
 ## Engines
 
-| Engine         | Install extra  | API key required | Notes                               |
-| -------------- | -------------- | ---------------- | ----------------------------------- |
-| duckduckgo     | (built-in)     | No               | Free, default fallback              |
-| brave          | (built-in)     | Optional\*       | Higher quality, $5/mo free credit\* |
-| google         | (built-in)     | No               | DDGS backend (not Google's API)     |
-| bing           | (built-in)     | No               | DDGS backend (not Bing's API)       |
-| **exa**        | `[exa]`        | Yes              | Code-aware semantic search          |
-| **tavily**     | `[tavily]`     | Yes              | LLM-optimized, 1K credits/mo free   |
-| **perplexity** | `[perplexity]` | Yes              | Conversational, up-to-date          |
-| **firecrawl**  | `[firecrawl]`  | Yes              | Scraping + search, 500 credits/mo   |
-| **serpapi**    | `[serpapi]`    | Yes              | 15+ engines via SerpAPI, ~$7.25/1K  |
+| Engine         | API key required | Notes                               |
+| -------------- | ---------------- | ----------------------------------- |
+| duckduckgo     | No               | Free, default fallback              |
+| google         | No               | DDGS backend (not Google's API)     |
+| bing           | No               | DDGS backend (not Bing's API)       |
+| yahoo          | No               | DDGS backend (not Yahoo's API)      |
+| brave          | Yes              | Higher quality, $5/mo free credit   |
+| exa            | Yes              | Code-aware semantic search          |
+| tavily         | Yes              | LLM-optimized, 1K credits/mo free   |
+| perplexity     | Yes              | Conversational, up-to-date          |
+| firecrawl      | Yes              | Scraping + search, 500 credits/mo   |
+| serpapi        | Yes              | 15+ engines via SerpAPI, ~$7.25/1K  |
+| linkup         | Yes              | Fast search, free tier available    |
+| jina           | Yes              | LLM-friendly, 100 RPM free tier     |
 
-\*Brave: no longer free for new signups. $5/mo with $5 free credit. Existing free-plan users keep 2,000 req/month.
 
 ### Get API keys
 
 | Engine     | Sign up / key page                              |
 | ---------- | ----------------------------------------------- |
 | brave      | https://api-dashboard.search.brave.com/register |
-| exa        | https://dashboard.exa.ai/onboarding             |
-| tavily     | https://tavily.com                              |
-| perplexity | https://api.perplexity.ai/api-keys              |
+| exa        | https://dashboard.exa.ai/api-keys               |
+| tavily     | https://app.tavily.com/home                     |
+| perplexity | https://www.perplexity.ai/account/api/keys      |
 | firecrawl  | https://firecrawl.dev/app/api-keys              |
-| serpapi    | https://serpapi.com/users/sign_up               |
+| serpapi    | https://serpapi.com/manage-api-key              |
+| linkup     | https://app.linkup.so/api-keys                  |
+| jina       | https://jina.ai/api-dashboard/key-manager       |
 
-Premium engines are disabled by default. Enable in `config.toml`:
+All engines are installed by default. Engines requiring API keys are disabled until configured in `config.toml`:
 
 ```toml
 [engines]
