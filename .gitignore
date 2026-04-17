@@ -48,6 +48,7 @@ __pycache__/
 *$py.class
 .venv/
 venv/
+*.egg-info/
 
 # Rust
 Cargo.lock
