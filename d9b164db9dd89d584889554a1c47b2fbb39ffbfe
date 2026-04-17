@@ -1,0 +1,1061 @@
+packages/python/drupal-web-search/src/drupal_web_search.egg-info/SOURCES.txt
+  c88f894ce7318650 4,15
+packages/python/drupal-web-search/config.toml
+  9a83d5068dc3e448 45-47
+  da6b7cc51b2837d6 55-63
+  8c6a2cab92aa7ff7 41-44
+  1112928b44e75211 3,8
+packages/python/drupal-web-search/src/drupal_web_search.egg-info/requires.txt
+  c88f894ce7318650 2-6
+  dfb2b1fa5c97434c 7
+packages/python/drupal-web-search/README.md
+  b4629d3e6f3d6dc1 11
+  091813c1ca648553 67
+  28a6565ada8b1bb9 54-57,61-65
+  3ffecb67d3d3fd60 59-60,81
+  210223c4e9bd7bbf 75-77,79
+  6240910137e7a50b 19-22,31-33
+  09e62043ed82f690 58
+  2b4999ee70a40c4a 83
+  45460bfddc5f17ba 66
+packages/python/drupal-web-search/pyproject.toml
+  f36ee1b700e357bf 36
+  1ff5577d2f7a3f92 31-35
+packages/python/drupal-web-search/src/drupal_web_search.egg-info/PKG-INFO
+  c88f894ce7318650 4,38,60-62,69-88,102-109,113,116,118-126,131
+  3c7cb1743fc097c7 54-57,65-68
+  80da02d203d54235 110-112,114
+  dfb2b1fa5c97434c 31,94-95,101,115
+  5d4f20de3207091b 26-30,46,89-93,96-100,117
+packages/python/drupal-web-search/src/drupal_web_search/search.py
+  e2cb0ebe00f151c8 170,173
+  b48a2314a44d0083 300-301
+  0247d6886795f19e 287-289,292
+  a357fa7cb3b9276e 208,214-215,218-220,223
+  f1534bcc4b487d75 229,234
+  3495e0488ca3c509 251,254
+  aeb532dd6ce107a6 136-137
+  113c3d9047c3c26c 297-299,303,306-312,314-317,319-324
+  9dce5e89469f50bb 28
+  c5d431ad5bad5144 55-61
+  ba177ffdd811bf2f 148-149
+  16109f8e9023857a 127,151
+  f7f0488bf2373ce9 189,192
+  22791d0234124e8c 48-54
+  04cd6c2dc089f3fa 213
+  86e7233b5f7be2d1 269-275,277-278,280,283-286,290-291,293-295
+  005255cd234a4c28 276
+  f4845de7f24289fa 302,313,318
+  25922f1e2cfb7032 365-369,371
+  efd9675af34f6db4 296,304-305
+  1eadd969af9a6cd9 150
+  f7bdfec4d74cc2fd 279,281-282
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.0",
+  "base_commit_sha": "d9b164db9dd89d584889554a1c47b2fbb39ffbfe",
+  "prompts": {
+    "005255cd234a4c28": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_2632ff397ffeFmq5Y3m4GOYpQp-cf3d2958-35c7-4b01-981a-44d49a024cb1",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 1,
+      "total_deletions": 1,
+      "accepted_lines": 1,
+      "overriden_lines": 0
+    },
+    "0247d6886795f19e": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_2632ff397ffeFmq5Y3m4GOYpQp-f4d80c81-6b1d-465d-bd72-457b4aea8ffd",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 4,
+      "total_deletions": 5,
+      "accepted_lines": 4,
+      "overriden_lines": 0
+    },
+    "04cd6c2dc089f3fa": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_2632ff397ffeFmq5Y3m4GOYpQp-b5805040-ec66-46f6-98b9-431a4e73384b",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 2,
+      "total_deletions": 4,
+      "accepted_lines": 1,
+      "overriden_lines": 0
+    },
+    "07d92eced3440023": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_2632ff397ffeFmq5Y3m4GOYpQp-04078682-9114-42ce-b771-d704598b5227",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 2,
+      "total_deletions": 0,
+      "accepted_lines": 0,
+      "overriden_lines": 0
+    },
+    "091813c1ca648553": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_2632ff397ffeFmq5Y3m4GOYpQp-bc8d6836-7e17-44e3-95bd-6f149c130934",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 1,
+      "total_deletions": 1,
+      "accepted_lines": 1,
+      "overriden_lines": 0
+    },
+    "09489ca464c727f4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_2632ff397ffeFmq5Y3m4GOYpQp-f0e2e8b9-4973-4812-bae7-6464eae1a84f",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 1,
+      "total_deletions": 1,
+      "accepted_lines": 0,
+      "overriden_lines": 0
+    },
+    "09e62043ed82f690": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_2632ff397ffeFmq5Y3m4GOYpQp-cf0ac405-8acb-43ec-9a5b-4be4166b3d82",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 2,
+      "total_deletions": 1,
+      "accepted_lines": 1,
+      "overriden_lines": 0
+    },
+    "1112928b44e75211": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_2632ff397ffeFmq5Y3m4GOYpQp-88520f9c-2cb1-47b6-be7e-d4736510d07e",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 4,
+      "total_deletions": 1,
+      "accepted_lines": 4,
+      "overriden_lines": 0
+    },
+    "113c3d9047c3c26c": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_2632ff397ffeFmq5Y3m4GOYpQp-2f073bd0-c856-4d25-ba20-73028e77b91c",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 30,
+      "total_deletions": 0,
+      "accepted_lines": 21,
+      "overriden_lines": 0
+    },
+    "119d2ac61e4d967b": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_2632ff397ffeFmq5Y3m4GOYpQp-97b99b8a-0c67-4654-a2b0-56c2114e4bfd",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 16,
+      "total_deletions": 0,
+      "accepted_lines": 0,
+      "overriden_lines": 0
+    },
+    "16109f8e9023857a": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_2632ff397ffeFmq5Y3m4GOYpQp-b507126c-c467-4f6c-a0ce-e35e8f379ff9",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 2,
+      "total_deletions": 2,
+      "accepted_lines": 2,
+      "overriden_lines": 0
+    },
+    "18c6a19cb4b0c0ac": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_2632ff397ffeFmq5Y3m4GOYpQp-b697ddfe-1348-42c9-a6c3-8dd190f0bcf8",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 1,
+      "total_deletions": 1,
+      "accepted_lines": 0,
+      "overriden_lines": 0
+    },
+    "1eadd969af9a6cd9": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_2632ff397ffeFmq5Y3m4GOYpQp-1129bd71-b44e-4663-b90d-b52a942bddbc",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 2,
+      "total_deletions": 0,
+      "accepted_lines": 1,
+      "overriden_lines": 0
+    },
+    "1ff5577d2f7a3f92": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_2632ff397ffeFmq5Y3m4GOYpQp-d3c7152e-d0be-42b9-b18a-f3f7ceedf671",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 5,
+      "total_deletions": 7,
+      "accepted_lines": 5,
+      "overriden_lines": 0
+    },
+    "210223c4e9bd7bbf": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_2632ff397ffeFmq5Y3m4GOYpQp-c89b751e-782e-4171-8331-cc9611797649",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 4,
+      "total_deletions": 4,
+      "accepted_lines": 4,
+      "overriden_lines": 0
+    },
+    "22791d0234124e8c": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_2632ff397ffeFmq5Y3m4GOYpQp-a0e2cc32-2df7-4e5a-8bf8-ef3a4afc784f",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 7,
+      "total_deletions": 0,
+      "accepted_lines": 7,
+      "overriden_lines": 0
+    },
+    "25922f1e2cfb7032": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_2632ff397ffeFmq5Y3m4GOYpQp-eaff5c61-b006-45c2-8eac-afd3bf453fb7",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 6,
+      "total_deletions": 4,
+      "accepted_lines": 6,
+      "overriden_lines": 0
+    },
+    "28a6565ada8b1bb9": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_2632ff397ffeFmq5Y3m4GOYpQp-93815573-071f-49c0-a6c6-e268ef161aff",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 11,
+      "total_deletions": 11,
+      "accepted_lines": 9,
+      "overriden_lines": 0
+    },
+    "2aee20b4d15fa482": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_2632ff397ffeFmq5Y3m4GOYpQp-5dd5d262-c545-44fe-b2e1-ac6557eff520",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 1,
+      "total_deletions": 0,
+      "accepted_lines": 0,
+      "overriden_lines": 1
+    },
+    "2b4999ee70a40c4a": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_2632ff397ffeFmq5Y3m4GOYpQp-24b1b190-4833-4569-b162-09b73d937f01",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 1,
+      "total_deletions": 1,
+      "accepted_lines": 1,
+      "overriden_lines": 0
+    },
+    "2e1327c9de19ee51": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_2632ff397ffeFmq5Y3m4GOYpQp-792fb003-9ee9-4c67-a9f0-d7962bd67762",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 14,
+      "total_deletions": 0,
+      "accepted_lines": 0,
+      "overriden_lines": 0
+    },
+    "3495e0488ca3c509": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_2632ff397ffeFmq5Y3m4GOYpQp-ccddf66b-9bf8-4351-8f6a-45ede831fe2a",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 2,
+      "total_deletions": 2,
+      "accepted_lines": 2,
+      "overriden_lines": 0
+    },
+    "3aa9ddfdfefd0c60": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_2632ff397ffeFmq5Y3m4GOYpQp-99b19cf2-9e45-4d7e-a4f1-63b0bb9ee69b",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 2,
+      "total_deletions": 2,
+      "accepted_lines": 0,
+      "overriden_lines": 0
+    },
+    "3c375dd59241923a": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_2632ff397ffeFmq5Y3m4GOYpQp-ce823577-8c55-4ea9-b6ee-094b5df44ed6",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 11,
+      "total_deletions": 0,
+      "accepted_lines": 0,
+      "overriden_lines": 0
+    },
+    "3c7cb1743fc097c7": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_2632ff397ffeFmq5Y3m4GOYpQp-99ba5e89-5f49-41ef-99b1-4ec4bb1a1a91",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 8,
+      "total_deletions": 0,
+      "accepted_lines": 8,
+      "overriden_lines": 0
+    },
+    "3ee565f4cb709c16": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_2632ff397ffeFmq5Y3m4GOYpQp-96e01889-173d-48aa-afaa-625fe01e394b",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 2,
+      "total_deletions": 0,
+      "accepted_lines": 0,
+      "overriden_lines": 0
+    },
+    "3ffecb67d3d3fd60": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_2632ff397ffeFmq5Y3m4GOYpQp-e11d71ae-3646-4cc5-9290-a456639ba267",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 5,
+      "total_deletions": 6,
+      "accepted_lines": 3,
+      "overriden_lines": 0
+    },
+    "45460bfddc5f17ba": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_2632ff397ffeFmq5Y3m4GOYpQp-5e0edabe-b858-4ba8-98b6-8b833312b0ec",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 1,
+      "total_deletions": 0,
+      "accepted_lines": 1,
+      "overriden_lines": 0
+    },
+    "49b58645d261567b": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_2632ff397ffeFmq5Y3m4GOYpQp-47efd4cd-b54a-477a-9c84-96a90ec805b1",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 21,
+      "total_deletions": 12,
+      "accepted_lines": 0,
+      "overriden_lines": 0
+    },
+    "4eff681c51cbc288": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_2632ff397ffeFmq5Y3m4GOYpQp-1beb83ae-5f2a-4440-8bfc-a85203317b55",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 1,
+      "total_deletions": 1,
+      "accepted_lines": 0,
+      "overriden_lines": 0
+    },
+    "598a360a36552d57": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_2632ff397ffeFmq5Y3m4GOYpQp-e2f4d3ad-4a5d-404c-8cc9-4cce722b1b60",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 1,
+      "total_deletions": 1,
+      "accepted_lines": 0,
+      "overriden_lines": 0
+    },
+    "5a68be573b2001ee": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_2632ff397ffeFmq5Y3m4GOYpQp",
+        "model": "opencode/big-pickle"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 0,
+      "total_deletions": 77,
+      "accepted_lines": 0,
+      "overriden_lines": 0
+    },
+    "5be24125039dbfe3": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_2632ff397ffeFmq5Y3m4GOYpQp-0315ce0a-7529-4420-a159-51295ad7ab3e",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 18,
+      "total_deletions": 2,
+      "accepted_lines": 0,
+      "overriden_lines": 0
+    },
+    "5d4f20de3207091b": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_2632ff397ffeFmq5Y3m4GOYpQp-74bff97a-e17a-4609-8d26-2fbc47c29600",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 21,
+      "total_deletions": 63,
+      "accepted_lines": 20,
+      "overriden_lines": 0
+    },
+    "5db0db6b159a011f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_2632ff397ffeFmq5Y3m4GOYpQp-fb61cc06-644c-475b-8577-e1f9a79c7972",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 1,
+      "total_deletions": 1,
+      "accepted_lines": 0,
+      "overriden_lines": 0
+    },
+    "6240910137e7a50b": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_2632ff397ffeFmq5Y3m4GOYpQp-bbc7ebb6-d6ca-4998-8a9f-1ba0e8ad518a",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 8,
+      "total_deletions": 0,
+      "accepted_lines": 8,
+      "overriden_lines": 0
+    },
+    "6e099cc7650789cc": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_2632ff397ffeFmq5Y3m4GOYpQp-72c11e72-833c-4c6a-a7b0-1f54899fa1d9",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 2,
+      "total_deletions": 2,
+      "accepted_lines": 0,
+      "overriden_lines": 0
+    },
+    "71f0b4f5128000bf": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_2632ff397ffeFmq5Y3m4GOYpQp-0e107b27-9b8c-49c3-a86e-f6620220d1e9",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 1,
+      "total_deletions": 0,
+      "accepted_lines": 0,
+      "overriden_lines": 0
+    },
+    "7a859e3294f43df6": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_2632ff397ffeFmq5Y3m4GOYpQp-43d3330e-c57e-4723-91c5-6946ede90ac3",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 18,
+      "total_deletions": 21,
+      "accepted_lines": 0,
+      "overriden_lines": 0
+    },
+    "80c78d7092e7e796": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_2632ff397ffeFmq5Y3m4GOYpQp-f61138c7-b152-45fb-8982-5b5c43cd7a71",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 12,
+      "total_deletions": 5,
+      "accepted_lines": 0,
+      "overriden_lines": 0
+    },
+    "80da02d203d54235": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_2632ff397ffeFmq5Y3m4GOYpQp-d8218d10-0013-4d9c-97f3-bd3079d41719",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 4,
+      "total_deletions": 4,
+      "accepted_lines": 4,
+      "overriden_lines": 0
+    },
+    "86e7233b5f7be2d1": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_2632ff397ffeFmq5Y3m4GOYpQp-76768770-1812-4a99-961c-ac88d1bf5c99",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 25,
+      "total_deletions": 0,
+      "accepted_lines": 19,
+      "overriden_lines": 0
+    },
+    "8b8d2345fea062ec": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_2632ff397ffeFmq5Y3m4GOYpQp-4324104c-ef4b-4647-bc7a-0b510c51e719",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 2,
+      "total_deletions": 4,
+      "accepted_lines": 0,
+      "overriden_lines": 0
+    },
+    "8c6a2cab92aa7ff7": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_2632ff397ffeFmq5Y3m4GOYpQp-c4dcc33f-e41c-42a8-baa0-aee89d4a3924",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 4,
+      "total_deletions": 0,
+      "accepted_lines": 4,
+      "overriden_lines": 0
+    },
+    "92f45542f11980d0": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_2632ff397ffeFmq5Y3m4GOYpQp-b201488f-d64f-4fc8-8f40-63383f06260b",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 5,
+      "total_deletions": 2,
+      "accepted_lines": 0,
+      "overriden_lines": 0
+    },
+    "9867ce5f9ee8ffd9": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_2632ff397ffeFmq5Y3m4GOYpQp-4642bd48-570c-4229-95a9-17024dc872bd",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 1,
+      "total_deletions": 0,
+      "accepted_lines": 0,
+      "overriden_lines": 0
+    },
+    "9a83d5068dc3e448": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_2632ff397ffeFmq5Y3m4GOYpQp-c839f30b-c275-4190-97fa-361a483160be",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 4,
+      "total_deletions": 0,
+      "accepted_lines": 4,
+      "overriden_lines": 0
+    },
+    "9dce5e89469f50bb": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_2632ff397ffeFmq5Y3m4GOYpQp-0af4a3d3-d2b3-4029-9707-453c9eafd3ce",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 1,
+      "total_deletions": 1,
+      "accepted_lines": 1,
+      "overriden_lines": 0
+    },
+    "9e671f777db3c24f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_2632ff397ffeFmq5Y3m4GOYpQp-f7f7dd54-32be-4a2d-9b67-21e1578b362f",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 2,
+      "total_deletions": 1,
+      "accepted_lines": 0,
+      "overriden_lines": 0
+    },
+    "a357fa7cb3b9276e": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_2632ff397ffeFmq5Y3m4GOYpQp-a1ef49b7-e5c4-4582-8dd4-c615dd698c78",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 7,
+      "total_deletions": 8,
+      "accepted_lines": 7,
+      "overriden_lines": 0
+    },
+    "ac40b61f89266fb4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_2632ff397ffeFmq5Y3m4GOYpQp-276d5df1-92a2-4ac3-bf58-ef27d6f91a8b",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 4,
+      "total_deletions": 1,
+      "accepted_lines": 0,
+      "overriden_lines": 0
+    },
+    "aeb532dd6ce107a6": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_2632ff397ffeFmq5Y3m4GOYpQp-83184786-c3d1-4bce-972a-a4a05dd99575",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 2,
+      "total_deletions": 0,
+      "accepted_lines": 2,
+      "overriden_lines": 0
+    },
+    "b1e43cad3483ca2e": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_2632ff397ffeFmq5Y3m4GOYpQp-ea9102da-1cdb-4f69-8598-64654628d48c",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 1,
+      "total_deletions": 0,
+      "accepted_lines": 0,
+      "overriden_lines": 0
+    },
+    "b4629d3e6f3d6dc1": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_2632ff397ffeFmq5Y3m4GOYpQp-5300c463-c614-4f5b-999e-200d7317fd61",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 1,
+      "total_deletions": 2,
+      "accepted_lines": 1,
+      "overriden_lines": 0
+    },
+    "b48a2314a44d0083": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_2632ff397ffeFmq5Y3m4GOYpQp-f2517d89-fa13-4250-8e5e-15933b1f89a8",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 4,
+      "total_deletions": 4,
+      "accepted_lines": 2,
+      "overriden_lines": 0
+    },
+    "ba177ffdd811bf2f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_2632ff397ffeFmq5Y3m4GOYpQp-acb1fb12-e811-4d8b-b6c0-1eae840a55a9",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 2,
+      "total_deletions": 0,
+      "accepted_lines": 2,
+      "overriden_lines": 0
+    },
+    "bad5afc3e59cbc88": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_2632ff397ffeFmq5Y3m4GOYpQp-0ed801ec-ea10-4917-a52e-5e6c1504558d",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 18,
+      "total_deletions": 1,
+      "accepted_lines": 0,
+      "overriden_lines": 0
+    },
+    "c5d431ad5bad5144": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_2632ff397ffeFmq5Y3m4GOYpQp-a0be8e1a-6aa5-49f1-ad70-0d1e5652a2e0",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 7,
+      "total_deletions": 0,
+      "accepted_lines": 7,
+      "overriden_lines": 0
+    },
+    "c88f894ce7318650": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_2632ff397ffeFmq5Y3m4GOYpQp-504fbb3f-b4e7-45b1-a60d-e0f208221efa",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 116,
+      "total_deletions": 4,
+      "accepted_lines": 53,
+      "overriden_lines": 0
+    },
+    "cc62a7fcbcd32854": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_2632ff397ffeFmq5Y3m4GOYpQp-72e2da82-2774-4089-8dc4-c10e5f42fbbe",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 1,
+      "total_deletions": 1,
+      "accepted_lines": 0,
+      "overriden_lines": 0
+    },
+    "cf4a184ca7e602db": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_2632ff397ffeFmq5Y3m4GOYpQp-85d36e43-d9a0-4bd1-801b-f63c1edb6ed1",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 1,
+      "total_deletions": 2,
+      "accepted_lines": 0,
+      "overriden_lines": 0
+    },
+    "cff454f97f27ede6": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_2632ff397ffeFmq5Y3m4GOYpQp-2a8b26c3-d44d-410e-8643-762d7b4f0056",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 10,
+      "total_deletions": 5,
+      "accepted_lines": 0,
+      "overriden_lines": 0
+    },
+    "d17f9c6182638b88": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_2632ff397ffeFmq5Y3m4GOYpQp-a00784b3-a633-4190-a371-86afea97a331",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 5,
+      "total_deletions": 10,
+      "accepted_lines": 0,
+      "overriden_lines": 0
+    },
+    "da6b7cc51b2837d6": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_2632ff397ffeFmq5Y3m4GOYpQp-841c937d-a7c2-4c9d-a85d-b4a88b066085",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 9,
+      "total_deletions": 2,
+      "accepted_lines": 9,
+      "overriden_lines": 0
+    },
+    "db74d7e25fb48056": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_2632ff397ffeFmq5Y3m4GOYpQp-eafb2e3e-6385-4b7a-b7c2-7a95b5e3dc1d",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 4,
+      "total_deletions": 21,
+      "accepted_lines": 0,
+      "overriden_lines": 0
+    },
+    "dbc9b2a37979d552": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_268b22a9fffe5T3KTJYnz42t0p-8ab4e0f7-94d5-4328-bc4a-2a065914d8b6",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 0,
+      "total_deletions": 0,
+      "accepted_lines": 21,
+      "overriden_lines": 0
+    },
+    "dfb2b1fa5c97434c": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_2632ff397ffeFmq5Y3m4GOYpQp-5632d137-77d3-4e18-8501-e9a9dfdecedb",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 6,
+      "total_deletions": 1,
+      "accepted_lines": 6,
+      "overriden_lines": 0
+    },
+    "e2cb0ebe00f151c8": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_2632ff397ffeFmq5Y3m4GOYpQp-77c950a2-b690-4b63-9390-0b537fb7015d",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 2,
+      "total_deletions": 2,
+      "accepted_lines": 2,
+      "overriden_lines": 0
+    },
+    "e4fd7dd344d5168a": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_2632ff397ffeFmq5Y3m4GOYpQp-0f56b0a4-926e-48cc-8cb8-158d4995205f",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 2,
+      "total_deletions": 5,
+      "accepted_lines": 0,
+      "overriden_lines": 0
+    },
+    "e9ca5c8f6d871281": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_2632ff397ffeFmq5Y3m4GOYpQp-dc75e6d7-7bda-412a-add0-cd61d45e03ea",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 3,
+      "total_deletions": 2,
+      "accepted_lines": 0,
+      "overriden_lines": 0
+    },
+    "edfbc641cd426f9e": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_2632ff397ffeFmq5Y3m4GOYpQp-68646f61-c196-4632-ab26-db87ae654d47",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 5,
+      "total_deletions": 4,
+      "accepted_lines": 0,
+      "overriden_lines": 0
+    },
+    "efd9675af34f6db4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_2632ff397ffeFmq5Y3m4GOYpQp-82b3a246-c00b-4360-94c9-dbd88c57f80a",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 3,
+      "total_deletions": 4,
+      "accepted_lines": 3,
+      "overriden_lines": 0
+    },
+    "f1534bcc4b487d75": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_2632ff397ffeFmq5Y3m4GOYpQp-082e6284-607d-401e-87cb-a88f7bb991a6",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 2,
+      "total_deletions": 4,
+      "accepted_lines": 2,
+      "overriden_lines": 0
+    },
+    "f36ee1b700e357bf": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_2632ff397ffeFmq5Y3m4GOYpQp-354d0d3a-f196-482f-ae7f-955e01949e51",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 1,
+      "total_deletions": 0,
+      "accepted_lines": 1,
+      "overriden_lines": 0
+    },
+    "f4845de7f24289fa": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_2632ff397ffeFmq5Y3m4GOYpQp-24970bf6-74c8-47db-ab54-dc0262150e0b",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 3,
+      "total_deletions": 3,
+      "accepted_lines": 3,
+      "overriden_lines": 0
+    },
+    "f7bdfec4d74cc2fd": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_2632ff397ffeFmq5Y3m4GOYpQp-a5285a59-db2d-4c0f-9409-2af56a13546d",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 4,
+      "total_deletions": 1,
+      "accepted_lines": 3,
+      "overriden_lines": 0
+    },
+    "f7f0488bf2373ce9": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_2632ff397ffeFmq5Y3m4GOYpQp-b0c42688-d5f0-4c1e-a1f5-a354e1f20b50",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 2,
+      "total_deletions": 2,
+      "accepted_lines": 2,
+      "overriden_lines": 0
+    }
+  }
+}
