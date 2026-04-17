@@ -1,6 +1,6 @@
 [engines]
 default = "brave"
-fallback_order = ["google", "yahoo", "duckduckgo", "bing"]
+fallback_order = ["bing", "duckduckgo", "perplexity"]
 
 [engines.duckduckgo]
 enabled = true
@@ -52,7 +52,12 @@ safe_search = "moderate"
 timeout = 30
 
 [site_preferences]
-restrict_to = ["drupal.org", "api.drupal.org", "git.drupalcode.org", "drupal.stackexchange.com"]
+restrict_to = [
+    "drupal.org",
+    "api.drupal.org",
+    "git.drupalcode.org",
+    "drupal.stackexchange.com"
+]
 preferred = [
     "github.com",
     "git.drupalcode.org",

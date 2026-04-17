@@ -66,6 +66,16 @@ CLI `--site` flags are combined with `restrict_to` and prepended to every query 
 | linkup         | Yes              | Fast search, free tier available    |
 | jina           | Yes              | LLM-friendly, 100 RPM free tier     |
 
+### Engine limitations
+
+The DDGS-based engines (duckduckgo, google, bing, yahoo) share a common underlying library but have inconsistent behavior:
+
+- **duckduckgo**: Works reliably for general searches.
+- **bing**: Supports `site:` query operators for domain filtering.
+- **google**, **yahoo**: Often fail with "No results found" or request errors in some environments. These are disabled in the default fallback order.
+- **site: operators**: Not supported by duckduckgo/google/yahoo backends. Only `bing` properly handles query-level site restrictions.
+
+Workaround: Configure `bing` explicitly when you need site filtering, or use engines with native site support (`jina`, `linkup`).
 
 ### Get API keys
 

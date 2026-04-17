@@ -361,10 +361,11 @@ def search_web(
     all_sites = tuple(s for s in cli_sites) + config_sites
 
     last_error: Exception | None = None
+    engines_with_native_site = {"jina", "linkup"}
+    engines_without_prefixed_site_support = {"duckduckgo", "google", "yahoo"}
     for engine in engine_order:
         modified_query = query
-        engines_with_native_site = {"jina", "linkup"}
-        if all_sites and engine not in engines_with_native_site:
+        if all_sites and engine not in engines_with_native_site and engine not in engines_without_prefixed_site_support:
             site_prefix = " ".join(f"site:{s}" for s in all_sites)
             modified_query = f"{site_prefix} {query}"
         try:
