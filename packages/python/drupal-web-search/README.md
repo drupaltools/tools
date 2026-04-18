@@ -70,13 +70,13 @@ CLI `--site` flags are combined with `restrict_to` and prepended to every query 
 
 These engines use AI model APIs with built-in web search tools:
 
-| Engine         | API key required | Model (default)             | Notes                               |
-| -------------- | ---------------- | -------------------------- | ----------------------------------- |
-| openai_search  | Yes (OpenAI)     | gpt-4.1                    | Uses OpenAI Responses API web_search  |
-| claude_search | Yes (Anthropic) | claude-sonnet-4-20250514    | Uses Claude web_search tool          |
-| gemini_search | Yes (Google)     | gemini-2.0-flash           | Uses Gemini google_search tool    |
-| grok_search    | Yes (xAI)        | grok-4.20-reasoning         | Uses Grok web_search tool         |
-| openrouter    | Yes (OpenRouter)| openai/gpt-4.1            | Unified gateway to multiple AI     |
+| Engine         | API key required | Model (default)        | Notes                               |
+| -------------- | ---------------- | --------------------- | ----------------------------------- |
+| openai_search  | Yes (OpenAI)     | gpt-4o-mini           | Uses OpenAI Responses API web_search  |
+| claude_search | Yes (Anthropic) | claude-haiku-4-20250514 | Uses Claude web_search tool          |
+| gemini_search | Yes (Google)     | gemini-2.0-flash-lite  | Uses Gemini google_search tool    |
+| grok_search    | Yes (xAI)        | grok-4-mini           | Uses Grok web_search tool         |
+| openrouter    | Yes (OpenRouter)| openai/gpt-4o-mini     | Unified gateway to multiple AI     |
 
 ### Engine limitations
 

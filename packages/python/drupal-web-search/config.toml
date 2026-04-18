@@ -50,27 +50,27 @@ enabled = true
 [engines.openai_search]
 api_key = "${OPENAI_API_KEY}"
 enabled = false
-model = "gpt-4.1"
+model = "gpt-4o-mini"
 
 [engines.claude_search]
 api_key = "${ANTHROPIC_API_KEY}"
 enabled = false
-model = "claude-sonnet-4-20250514"
+model = "claude-haiku-4-20250514"
 
 [engines.gemini_search]
 api_key = "${GEMINI_API_KEY}"
 enabled = false
-model = "gemini-2.0-flash"
+model = "gemini-2.0-flash-lite"
 
 [engines.grok_search]
 api_key = "${XAI_API_KEY}"
 enabled = false
-model = "grok-4.20-reasoning"
+model = "grok-4-mini"
 
 [engines.openrouter]
 api_key = "${OPENROUTER_API_KEY}"
 enabled = false
-model = "openai/gpt-4.1"
+model = "openai/gpt-4o-mini"
 
 [search]
 num_results = 10

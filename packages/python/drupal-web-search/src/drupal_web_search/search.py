@@ -373,7 +373,7 @@ def _search_openai(query: str, limit: int, config: AppConfig) -> list[SearchResu
     api_key = config.engines.get("openai_search", EngineSettings(name="openai_search", enabled=False)).api_key
     if not api_key:
         raise ValueError("OPENAI_API_KEY is required for openai_search engine.")
-    model = config.engines.get("openai_search", EngineSettings(name="openai_search", enabled=False)).model or "gpt-4.1"
+    model = config.engines.get("openai_search", EngineSettings(name="openai_search", enabled=False)).model or "gpt-4o-mini"
     client = OpenAI(api_key=api_key)
     response = client.responses.create(
         model=model,
@@ -403,7 +403,7 @@ def _search_claude(query: str, limit: int, config: AppConfig) -> list[SearchResu
     api_key = config.engines.get("claude_search", EngineSettings(name="claude_search", enabled=False)).api_key
     if not api_key:
         raise ValueError("ANTHROPIC_API_KEY is required for claude_search engine.")
-    model = config.engines.get("claude_search", EngineSettings(name="claude_search", enabled=False)).model or "claude-sonnet-4-20250514"
+    model = config.engines.get("claude_search", EngineSettings(name="claude_search", enabled=False)).model or "claude-haiku-4-20250514"
     client = anthropic.Anthropic(api_key=api_key)
     response = client.messages.create(
         model=model,
@@ -431,7 +431,7 @@ def _search_gemini(query: str, limit: int, config: AppConfig) -> list[SearchResu
     api_key = config.engines.get("gemini_search", EngineSettings(name="gemini_search", enabled=False)).api_key
     if not api_key:
         raise ValueError("GEMINI_API_KEY is required for gemini_search engine.")
-    model = config.engines.get("gemini_search", EngineSettings(name="gemini_search", enabled=False)).model or "gemini-2.0-flash"
+    model = config.engines.get("gemini_search", EngineSettings(name="gemini_search", enabled=False)).model or "gemini-2.0-flash-lite"
     genai.configure(api_key=api_key)
     response = genai.generate_content(model=model, contents=query, tools=[genai.Tool(google_search=genai.GoogleSearch())])
     results: list[SearchResult] = []
@@ -453,7 +453,7 @@ def _search_grok(query: str, limit: int, config: AppConfig) -> list[SearchResult
     api_key = config.engines.get("grok_search", EngineSettings(name="grok_search", enabled=False)).api_key
     if not api_key:
         raise ValueError("XAI_API_KEY is required for grok_search engine.")
-    model = config.engines.get("grok_search", EngineSettings(name="grok_search", enabled=False)).model or "grok-4.20-reasoning"
+    model = config.engines.get("grok_search", EngineSettings(name="grok_search", enabled=False)).model or "grok-4-mini"
     client = XAIClient(api_key=api_key)
     response = client.responses.create(
         model=model,
