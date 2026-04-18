@@ -383,19 +383,24 @@ def _search_openai(query: str, limit: int, config: AppConfig) -> list[SearchResu
         input=query,
     )
     results: list[SearchResult] = []
-    for output in response.output:
-        if output.type == "message":
-            for content in output.content:
-                if content.type == "output_text":
-                    text = content.text
-                    for item in text.split("\n")[:limit]:
-                        if item.strip():
-                            results.append(SearchResult(
-                                title=item.strip()[:80],
-                                url="",
-                                snippet=item.strip(),
-                                engine="openai",
-                            ))
+    sources: list[str] = []
+    if hasattr(response, "output"):
+        for output in response.output:
+            if output.type == "message":
+                for content in output.content:
+                    if content.type == "output_text":
+                        text = content.text
+                        for item in text.split("\n")[:limit]:
+                            if item.strip():
+                                results.append(SearchResult(
+                                    title=item.strip()[:80],
+                                    url="",
+                                    snippet=item.strip(),
+                                    engine="openai",
+                                ))
+            elif output.type == "web_search_call":
+                if hasattr(output, "action") and hasattr(output.action, "sources"):
+                    sources = list(output.action.sources)
     return results[:limit]
 
 
