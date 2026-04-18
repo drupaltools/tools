@@ -23,6 +23,7 @@ class EngineSettings:
     name: str
     enabled: bool
     api_key: str = ""
+    model: str = ""
 
 
 @dataclass(frozen=True)
@@ -112,6 +113,7 @@ def load_config(config_path: Path | None = None) -> AppConfig:
             name=name,
             enabled=bool(values.get("enabled", True)),
             api_key=str(values.get("api_key", "")),
+            model=str(values.get("model", "")),
         )
 
     if default_engine not in engine_settings:

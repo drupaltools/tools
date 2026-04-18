@@ -59,6 +59,41 @@ try:
 except ImportError:
     _JINA_AVAILABLE = False
 
+try:
+    from openai import OpenAI
+
+    _OPENAI_AVAILABLE = True
+except ImportError:
+    _OPENAI_AVAILABLE = False
+
+try:
+    import anthropic
+
+    _ANTHROPIC_AVAILABLE = True
+except ImportError:
+    _ANTHROPIC_AVAILABLE = False
+
+try:
+    from google import genai
+
+    _GEMINI_AVAILABLE = True
+except ImportError:
+    _GEMINI_AVAILABLE = False
+
+try:
+    from xai import Client as XAIClient
+
+    _XAI_AVAILABLE = True
+except ImportError:
+    _XAI_AVAILABLE = False
+
+try:
+    import openai as openai_lib
+
+    _OPENROUTER_AVAILABLE = True
+except ImportError:
+    _OPENROUTER_AVAILABLE = False
+
 
 @dataclass(frozen=True)
 class SearchResult:
@@ -149,6 +184,16 @@ def _run_engine(engine: str, query: str, limit: int, config: AppConfig, sites: t
         return _search_linkup(query, limit, config)
     if engine == "jina":
         return _search_jina(query, limit, config, sites)
+    if engine == "openai_search":
+        return _search_openai(query, limit, config)
+    if engine == "claude_search":
+        return _search_claude(query, limit, config)
+    if engine == "gemini_search":
+        return _search_gemini(query, limit, config)
+    if engine == "grok_search":
+        return _search_grok(query, limit, config)
+    if engine == "openrouter":
+        return _search_openrouter(query, limit, config)
     raise ValueError(f"Unknown engine: {engine}")
 
 
@@ -320,6 +365,146 @@ def _search_jina(query: str, limit: int, config: AppConfig, sites: tuple[str, ..
         )
         for r in results
     ]
+
+
+def _search_openai(query: str, limit: int, config: AppConfig) -> list[SearchResult]:
+    if not _OPENAI_AVAILABLE:
+        raise ImportError("openai is not available. Install with pip install openai")
+    api_key = config.engines.get("openai_search", EngineSettings(name="openai_search", enabled=False)).api_key
+    if not api_key:
+        raise ValueError("OPENAI_API_KEY is required for openai_search engine.")
+    model = config.engines.get("openai_search", EngineSettings(name="openai_search", enabled=False)).model or "gpt-4.1"
+    client = OpenAI(api_key=api_key)
+    response = client.responses.create(
+        model=model,
+        tools=[{"type": "web_search"}],
+        input=query,
+    )
+    results: list[SearchResult] = []
+    for output in response.output:
+        if output.type == "message":
+            for content in output.content:
+                if content.type == "output_text":
+                    text = content.text
+                    for item in text.split("\n")[:limit]:
+                        if item.strip():
+                            results.append(SearchResult(
+                                title=item.strip()[:80],
+                                url="",
+                                snippet=item.strip(),
+                                engine="openai_search",
+                            ))
+    return results[:limit]
+
+
+def _search_claude(query: str, limit: int, config: AppConfig) -> list[SearchResult]:
+    if not _ANTHROPIC_AVAILABLE:
+        raise ImportError("anthropic is not available. Install with pip install anthropic")
+    api_key = config.engines.get("claude_search", EngineSettings(name="claude_search", enabled=False)).api_key
+    if not api_key:
+        raise ValueError("ANTHROPIC_API_KEY is required for claude_search engine.")
+    model = config.engines.get("claude_search", EngineSettings(name="claude_search", enabled=False)).model or "claude-sonnet-4-20250514"
+    client = anthropic.Anthropic(api_key=api_key)
+    response = client.messages.create(
+        model=model,
+        max_tokens=1024,
+        tools=[{"type": "web_search_20250305", "name": "web_search"}],
+        messages=[{"role": "user", "content": query}],
+    )
+    results: list[SearchResult] = []
+    for content in response.content:
+        if hasattr(content, "text") and content.text:
+            for item in content.text.split("\n")[:limit]:
+                if item.strip():
+                    results.append(SearchResult(
+                        title=item.strip()[:80],
+                        url="",
+                        snippet=item.strip(),
+                        engine="claude_search",
+                    ))
+    return results[:limit]
+
+
+def _search_gemini(query: str, limit: int, config: AppConfig) -> list[SearchResult]:
+    if not _GEMINI_AVAILABLE:
+        raise ImportError("google-genai is not available. Install with pip install google-genai")
+    api_key = config.engines.get("gemini_search", EngineSettings(name="gemini_search", enabled=False)).api_key
+    if not api_key:
+        raise ValueError("GEMINI_API_KEY is required for gemini_search engine.")
+    model = config.engines.get("gemini_search", EngineSettings(name="gemini_search", enabled=False)).model or "gemini-2.0-flash"
+    genai.configure(api_key=api_key)
+    response = genai.generate_content(model=model, contents=query, tools=[genai.Tool(google_search=genai.GoogleSearch())])
+    results: list[SearchResult] = []
+    text = response.text
+    for item in text.split("\n")[:limit]:
+        if item.strip():
+            results.append(SearchResult(
+                title=item.strip()[:80],
+                url="",
+                snippet=item.strip(),
+                engine="gemini_search",
+            ))
+    return results[:limit]
+
+
+def _search_grok(query: str, limit: int, config: AppConfig) -> list[SearchResult]:
+    if not _XAI_AVAILABLE:
+        raise ImportError("xai is not available. Install with pip install xai")
+    api_key = config.engines.get("grok_search", EngineSettings(name="grok_search", enabled=False)).api_key
+    if not api_key:
+        raise ValueError("XAI_API_KEY is required for grok_search engine.")
+    model = config.engines.get("grok_search", EngineSettings(name="grok_search", enabled=False)).model or "grok-4.20-reasoning"
+    client = XAIClient(api_key=api_key)
+    response = client.responses.create(
+        model=model,
+        tools=[{"type": "web_search"}],
+        input=query,
+    )
+    results: list[SearchResult] = []
+    for output in response.output:
+        if output.type == "message":
+            for content in output.content:
+                if content.type == "output_text":
+                    text = content.text
+                    for item in text.split("\n")[:limit]:
+                        if item.strip():
+                            results.append(SearchResult(
+                                title=item.strip()[:80],
+                                url="",
+                                snippet=item.strip(),
+                                engine="grok_search",
+                            ))
+    return results[:limit]
+
+
+def _search_openrouter(query: str, limit: int, config: AppConfig) -> list[SearchResult]:
+    if not _OPENROUTER_AVAILABLE:
+        raise ImportError("openai is not available. Install with pip install openai")
+    api_key = config.engines.get("openrouter", EngineSettings(name="openrouter", enabled=False)).api_key
+    if not api_key:
+        raise ValueError("OPENROUTER_API_KEY is required for openrouter engine.")
+    model = config.engines.get("openrouter", EngineSettings(name="openrouter", enabled=False)).model or "openai/gpt-4.1"
+    client = openai_lib.OpenAI(api_key=api_key, base_url="https://openrouter.ai/v1")
+    response = client.responses.create(
+        model=model,
+        tools=[{"type": "web_search"}],
+        input=query,
+    )
+    results: list[SearchResult] = []
+    for output in response.output:
+        if output.type == "message":
+            for content in output.content:
+                if content.type == "output_text":
+                    text = content.text
+                    for item in text.split("\n")[:limit]:
+                        if item.strip():
+                            results.append(SearchResult(
+                                title=item.strip()[:80],
+                                url="",
+                                snippet=item.strip(),
+                                engine="openrouter",
+                            ))
+    return results[:limit]
 
 
 def apply_site_preferences(results: list[SearchResult], config: AppConfig) -> list[SearchResult]:

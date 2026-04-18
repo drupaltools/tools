@@ -66,6 +66,18 @@ CLI `--site` flags are combined with `restrict_to` and prepended to every query 
 | linkup         | Yes              | Fast search, free tier available    |
 | jina           | Yes              | LLM-friendly, 100 RPM free tier     |
 
+### AI provider search engines
+
+These engines use AI model APIs with built-in web search tools:
+
+| Engine         | API key required | Model (default)             | Notes                               |
+| -------------- | ---------------- | -------------------------- | ----------------------------------- |
+| openai_search  | Yes (OpenAI)     | gpt-4.1                    | Uses OpenAI Responses API web_search  |
+| claude_search | Yes (Anthropic) | claude-sonnet-4-20250514    | Uses Claude web_search tool          |
+| gemini_search | Yes (Google)     | gemini-2.0-flash           | Uses Gemini google_search tool    |
+| grok_search    | Yes (xAI)        | grok-4.20-reasoning         | Uses Grok web_search tool         |
+| openrouter    | Yes (OpenRouter)| openai/gpt-4.1            | Unified gateway to multiple AI     |
+
 ### Engine limitations
 
 The DDGS-based engines (duckduckgo, google, bing, yahoo) share a common underlying library but have inconsistent behavior:
@@ -89,6 +101,11 @@ Workaround: Configure `bing` explicitly when you need site filtering, or use eng
 | serpapi    | https://serpapi.com/manage-api-key              |
 | linkup     | https://app.linkup.so/api-keys                  |
 | jina       | https://jina.ai/api-dashboard/key-manager       |
+| openai_search | https://platform.openai.com/account/api-keys  |
+| claude_search | https://www.anthropic.com/account/api     |
+| gemini_search | https://aistudio.google.com/app/apikey      |
+| grok_search  | https://console.x.ai/                       |
+| openrouter  | https://openrouter.ai/keys                  |
 
 All engines are installed by default. Engines requiring API keys are disabled until configured in `config.toml`:
 
