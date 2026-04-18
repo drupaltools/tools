@@ -184,13 +184,13 @@ def _run_engine(engine: str, query: str, limit: int, config: AppConfig, sites: t
         return _search_linkup(query, limit, config)
     if engine == "jina":
         return _search_jina(query, limit, config, sites)
-    if engine == "openai_search":
+    if engine == "openai":
         return _search_openai(query, limit, config)
-    if engine == "claude_search":
+    if engine == "claude":
         return _search_claude(query, limit, config)
-    if engine == "gemini_search":
+    if engine == "gemini":
         return _search_gemini(query, limit, config)
-    if engine == "grok_search":
+    if engine == "grok":
         return _search_grok(query, limit, config)
     if engine == "openrouter":
         return _search_openrouter(query, limit, config)
@@ -370,10 +370,12 @@ def _search_jina(query: str, limit: int, config: AppConfig, sites: tuple[str, ..
 def _search_openai(query: str, limit: int, config: AppConfig) -> list[SearchResult]:
     if not _OPENAI_AVAILABLE:
         raise ImportError("openai is not available. Install with pip install openai")
-    api_key = config.engines.get("openai_search", EngineSettings(name="openai_search", enabled=False)).api_key
+    api_key = config.engines.get("openai", EngineSettings(name="openai", enabled=False)).api_key
     if not api_key:
-        raise ValueError("OPENAI_API_KEY is required for openai_search engine.")
-    model = config.engines.get("openai_search", EngineSettings(name="openai_search", enabled=False)).model or "gpt-4o-mini"
+        raise ValueError("OPENAI_API_KEY is required for openai engine.")
+    model = config.engines.get("openai", EngineSettings(name="openai", enabled=False)).model
+    if not model:
+        raise ValueError("Model is required for openai engine. Set model in config.toml.")
     client = OpenAI(api_key=api_key)
     response = client.responses.create(
         model=model,
@@ -392,7 +394,7 @@ def _search_openai(query: str, limit: int, config: AppConfig) -> list[SearchResu
                                 title=item.strip()[:80],
                                 url="",
                                 snippet=item.strip(),
-                                engine="openai_search",
+                                engine="openai",
                             ))
     return results[:limit]
 
@@ -400,10 +402,12 @@ def _search_openai(query: str, limit: int, config: AppConfig) -> list[SearchResu
 def _search_claude(query: str, limit: int, config: AppConfig) -> list[SearchResult]:
     if not _ANTHROPIC_AVAILABLE:
         raise ImportError("anthropic is not available. Install with pip install anthropic")
-    api_key = config.engines.get("claude_search", EngineSettings(name="claude_search", enabled=False)).api_key
+    api_key = config.engines.get("claude", EngineSettings(name="claude", enabled=False)).api_key
     if not api_key:
-        raise ValueError("ANTHROPIC_API_KEY is required for claude_search engine.")
-    model = config.engines.get("claude_search", EngineSettings(name="claude_search", enabled=False)).model or "claude-haiku-4-20250514"
+        raise ValueError("ANTHROPIC_API_KEY is required for claude engine.")
+    model = config.engines.get("claude", EngineSettings(name="claude", enabled=False)).model
+    if not model:
+        raise ValueError("Model is required for claude engine. Set model in config.toml.")
     client = anthropic.Anthropic(api_key=api_key)
     response = client.messages.create(
         model=model,
@@ -420,7 +424,7 @@ def _search_claude(query: str, limit: int, config: AppConfig) -> list[SearchResu
                         title=item.strip()[:80],
                         url="",
                         snippet=item.strip(),
-                        engine="claude_search",
+                        engine="claude",
                     ))
     return results[:limit]
 
@@ -428,10 +432,12 @@ def _search_claude(query: str, limit: int, config: AppConfig) -> list[SearchResu
 def _search_gemini(query: str, limit: int, config: AppConfig) -> list[SearchResult]:
     if not _GEMINI_AVAILABLE:
         raise ImportError("google-genai is not available. Install with pip install google-genai")
-    api_key = config.engines.get("gemini_search", EngineSettings(name="gemini_search", enabled=False)).api_key
+    api_key = config.engines.get("gemini", EngineSettings(name="gemini", enabled=False)).api_key
     if not api_key:
-        raise ValueError("GEMINI_API_KEY is required for gemini_search engine.")
-    model = config.engines.get("gemini_search", EngineSettings(name="gemini_search", enabled=False)).model or "gemini-2.0-flash-lite"
+        raise ValueError("GEMINI_API_KEY is required for gemini engine.")
+    model = config.engines.get("gemini", EngineSettings(name="gemini", enabled=False)).model
+    if not model:
+        raise ValueError("Model is required for gemini engine. Set model in config.toml.")
     genai.configure(api_key=api_key)
     response = genai.generate_content(model=model, contents=query, tools=[genai.Tool(google_search=genai.GoogleSearch())])
     results: list[SearchResult] = []
@@ -442,7 +448,7 @@ def _search_gemini(query: str, limit: int, config: AppConfig) -> list[SearchResu
                 title=item.strip()[:80],
                 url="",
                 snippet=item.strip(),
-                engine="gemini_search",
+                engine="gemini",
             ))
     return results[:limit]
 
@@ -450,10 +456,12 @@ def _search_gemini(query: str, limit: int, config: AppConfig) -> list[SearchResu
 def _search_grok(query: str, limit: int, config: AppConfig) -> list[SearchResult]:
     if not _XAI_AVAILABLE:
         raise ImportError("xai is not available. Install with pip install xai")
-    api_key = config.engines.get("grok_search", EngineSettings(name="grok_search", enabled=False)).api_key
+    api_key = config.engines.get("grok", EngineSettings(name="grok", enabled=False)).api_key
     if not api_key:
-        raise ValueError("XAI_API_KEY is required for grok_search engine.")
-    model = config.engines.get("grok_search", EngineSettings(name="grok_search", enabled=False)).model or "grok-4-mini"
+        raise ValueError("XAI_API_KEY is required for grok engine.")
+    model = config.engines.get("grok", EngineSettings(name="grok", enabled=False)).model
+    if not model:
+        raise ValueError("Model is required for grok engine. Set model in config.toml.")
     client = XAIClient(api_key=api_key)
     response = client.responses.create(
         model=model,
@@ -472,7 +480,7 @@ def _search_grok(query: str, limit: int, config: AppConfig) -> list[SearchResult
                                 title=item.strip()[:80],
                                 url="",
                                 snippet=item.strip(),
-                                engine="grok_search",
+                                engine="grok",
                             ))
     return results[:limit]
 
@@ -483,7 +491,9 @@ def _search_openrouter(query: str, limit: int, config: AppConfig) -> list[Search
     api_key = config.engines.get("openrouter", EngineSettings(name="openrouter", enabled=False)).api_key
     if not api_key:
         raise ValueError("OPENROUTER_API_KEY is required for openrouter engine.")
-    model = config.engines.get("openrouter", EngineSettings(name="openrouter", enabled=False)).model or "openai/gpt-4.1"
+    model = config.engines.get("openrouter", EngineSettings(name="openrouter", enabled=False)).model
+    if not model:
+        raise ValueError("Model is required for openrouter engine. Set model in config.toml.")
     client = openai_lib.OpenAI(api_key=api_key, base_url="https://openrouter.ai/v1")
     response = client.responses.create(
         model=model,
