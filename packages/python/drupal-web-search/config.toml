@@ -55,17 +55,17 @@ model = "gpt-4o-mini"
 [engines.claude]
 api_key = "${ANTHROPIC_API_KEY}"
 enabled = true
-model = "claude-haiku-4-20250514"
+model = "claude-haiku-3-5-20250514"
 
 [engines.gemini]
 api_key = "${GEMINI_API_KEY}"
 enabled = true
-model = "gemini-2.0-flash-lite"
+model = "gemini-2.0-flash"
 
 [engines.grok]
 api_key = "${XAI_API_KEY}"
 enabled = true
-model = "grok-4-mini"
+model = "grok-4-0709"
 
 [engines.openrouter]
 api_key = "${OPENROUTER_API_KEY}"

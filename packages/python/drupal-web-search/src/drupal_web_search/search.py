@@ -81,7 +81,7 @@ except ImportError:
     _GEMINI_AVAILABLE = False
 
 try:
-    from xai import Client as XAIClient
+    from xai_sdk import Client as XAIClient
 
     _XAI_AVAILABLE = True
 except ImportError:
@@ -454,15 +454,13 @@ def _search_gemini(query: str, limit: int, config: AppConfig) -> list[SearchResu
 
 
 def _search_grok(query: str, limit: int, config: AppConfig) -> list[SearchResult]:
-    if not _XAI_AVAILABLE:
-        raise ImportError("xai is not available. Install with pip install xai")
     api_key = config.engines.get("grok", EngineSettings(name="grok", enabled=False)).api_key
     if not api_key:
         raise ValueError("XAI_API_KEY is required for grok engine.")
     model = config.engines.get("grok", EngineSettings(name="grok", enabled=False)).model
     if not model:
         raise ValueError("Model is required for grok engine. Set model in config.toml.")
-    client = XAIClient(api_key=api_key)
+    client = OpenAI(api_key=api_key, base_url="https://api.x.ai/v1")
     response = client.responses.create(
         model=model,
         tools=[{"type": "web_search"}],
