@@ -72,8 +72,8 @@ These engines use AI model APIs with built-in web search tools:
 
 | Engine         | API key required | Model (default)        | Notes                               |
 | -------------- | ---------------- | --------------------- | ----------------------------------- |
-| openai_search  | Yes (OpenAI)     | gpt-4o-mini           | Uses OpenAI Responses API web_search  |
-| claude_search | Yes (Anthropic) | claude-haiku-4-20250514 | Uses Claude web_search tool          |
+| openai  | Yes (OpenAI)     | gpt-4o-mini           | Uses OpenAI Responses API web_search  |
+| claude | Yes (Anthropic) | claude-haiku-4-20250514 | Uses Claude web_search tool          |
 | gemini_search | Yes (Google)     | gemini-2.0-flash-lite  | Uses Gemini google_search tool    |
 | grok_search    | Yes (xAI)        | grok-4-mini           | Uses Grok web_search tool         |
 | openrouter    | Yes (OpenRouter)| openai/gpt-4o-mini     | Unified gateway to multiple AI     |
@@ -101,8 +101,8 @@ Workaround: Configure `bing` explicitly when you need site filtering, or use eng
 | serpapi    | https://serpapi.com/manage-api-key              |
 | linkup     | https://app.linkup.so/api-keys                  |
 | jina       | https://jina.ai/api-dashboard/key-manager       |
-| openai_search | https://platform.openai.com/account/api-keys  |
-| claude_search | https://www.anthropic.com/account/api     |
+| openai | https://platform.openai.com/account/api-keys  |
+| claude | https://www.anthropic.com/account/api     |
 | gemini_search | https://aistudio.google.com/app/apikey      |
 | grok_search  | https://console.x.ai/                       |
 | openrouter  | https://openrouter.ai/keys                  |
