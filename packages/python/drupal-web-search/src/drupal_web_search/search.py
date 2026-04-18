@@ -438,10 +438,14 @@ def _search_gemini(query: str, limit: int, config: AppConfig) -> list[SearchResu
     model = config.engines.get("gemini", EngineSettings(name="gemini", enabled=False)).model
     if not model:
         raise ValueError("Model is required for gemini engine. Set model in config.toml.")
-    genai.configure(api_key=api_key)
-    response = genai.generate_content(model=model, contents=query, tools=[genai.Tool(google_search=genai.GoogleSearch())])
+    client = genai.Client(api_key=api_key)
+    response = client.models.generate_content(
+        model=model,
+        contents=query,
+        config={"tools": [{"google_search": {}}]}
+    )
     results: list[SearchResult] = []
-    text = response.text
+    text = response.candidates[0].content.parts[0].text if response.candidates else ""
     for item in text.split("\n")[:limit]:
         if item.strip():
             results.append(SearchResult(
