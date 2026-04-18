@@ -1,0 +1,36 @@
+packages/python/drupal-web-search/config.toml
+  971b39b59d29c15e 58
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.0",
+  "base_commit_sha": "49140ba63af33fa10e8f5072a7a14d2c6cf52531",
+  "prompts": {
+    "971b39b59d29c15e": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_2632ff397ffeFmq5Y3m4GOYpQp-19dfb64a-a06d-4e55-a614-4deddc06afc8",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 1,
+      "total_deletions": 1,
+      "accepted_lines": 1,
+      "overriden_lines": 0
+    },
+    "dbc9b2a37979d552": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_268b22a9fffe5T3KTJYnz42t0p-8ab4e0f7-94d5-4328-bc4a-2a065914d8b6",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 0,
+      "total_deletions": 0,
+      "accepted_lines": 21,
+      "overriden_lines": 0
+    }
+  }
+}
