@@ -66,29 +66,6 @@ CLI `--site` flags are combined with `restrict_to` and prepended to every query 
 | linkup         | Yes              | Fast search, free tier available    |
 | jina           | Yes              | LLM-friendly, 100 RPM free tier     |
 
-### AI provider search engines
-
-These engines use AI model APIs with built-in web search tools:
-
-| Engine         | API key required | Model (default)        | Notes                               |
-| -------------- | ---------------- | --------------------- | ----------------------------------- |
-| openai  | Yes (OpenAI)     | gpt-4o-mini           | Uses OpenAI Responses API web_search  |
-| claude | Yes (Anthropic) | claude-haiku-4-20250514 | Uses Claude web_search tool          |
-| gemini_search | Yes (Google)     | gemini-2.0-flash-lite  | Uses Gemini google_search tool    |
-| grok_search    | Yes (xAI)        | grok-4-mini           | Uses Grok web_search tool         |
-| openrouter    | Yes (OpenRouter)| openai/gpt-4o-mini     | Unified gateway to multiple AI     |
-
-### Engine limitations
-
-The DDGS-based engines (duckduckgo, google, bing, yahoo) share a common underlying library but have inconsistent behavior:
-
-- **duckduckgo**: Works reliably for general searches.
-- **bing**: Supports `site:` query operators for domain filtering.
-- **google**, **yahoo**: Often fail with "No results found" or request errors in some environments. These are disabled in the default fallback order.
-- **site: operators**: Not supported by duckduckgo/google/yahoo backends. Only `bing` properly handles query-level site restrictions.
-
-Workaround: Configure `bing` explicitly when you need site filtering, or use engines with native site support (`jina`, `linkup`).
-
 ### Get API keys
 
 | Engine     | Sign up / key page                              |

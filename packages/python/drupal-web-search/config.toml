@@ -46,32 +46,6 @@ enabled = true
 api_key = "${JINA_API_KEY}"
 enabled = true
 
-# AI provider web search engines
-[engines.openai]
-api_key = "${OPENAI_API_KEY}"
-enabled = true
-model = "gpt-4o-mini"
-
-[engines.claude]
-api_key = "${ANTHROPIC_API_KEY}"
-enabled = true
-model = "claude-haiku-4-5"
-
-[engines.gemini]
-api_key = "${GEMINI_API_KEY}"
-enabled = true
-model = "gemini-2.0-flash"
-
-[engines.grok]
-api_key = "${XAI_API_KEY}"
-enabled = true
-model = "grok-4-0709"
-
-[engines.openrouter]
-api_key = "${OPENROUTER_API_KEY}"
-enabled = true
-model = "openai/gpt-4o-mini"
-
 [search]
 num_results = 10
 safe_search = "moderate"
