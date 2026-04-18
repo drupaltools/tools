@@ -55,7 +55,7 @@ model = "gpt-4o-mini"
 [engines.claude]
 api_key = "${ANTHROPIC_API_KEY}"
 enabled = true
-model = "claude-haiku-3-5-20250514"
+model = "claude-haiku-4-5"
 
 [engines.gemini]
 api_key = "${GEMINI_API_KEY}"
