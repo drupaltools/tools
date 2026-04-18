@@ -121,3 +121,4 @@ Each result includes:
 
 - [@plust/search-sdk](https://github.com/PlustOrg/search-sdk) - TypeScript SDK (unified interface for Google, SerpAPI, Brave, Exa, Tavily, SearXNG, Arxiv, DuckDuckGo)
 - [ddgs](https://github.com/deedy5/ddgs) - Python metasearch library (used as the backend for duckduckgo, brave, google, bing, yahoo)
+- [wizsearch](https://github.com/mirasoth/wizsearch) - Python web search library with multiple engine support
