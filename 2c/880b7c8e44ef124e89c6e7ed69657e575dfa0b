@@ -1,0 +1,37 @@
+packages/python/drupal-web-search/README.md
+  cf369f22764759ba 120
+  57c34c1ea0549950 119,121-166
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "2c880b7c8e44ef124e89c6e7ed69657e575dfa0b",
+  "prompts": {
+    "57c34c1ea0549950": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_2632ff397ffeFmq5Y3m4GOYpQp-adf4ebfe-12f2-4c45-803c-fc67a28f0d8d",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 48,
+      "total_deletions": 0,
+      "accepted_lines": 47,
+      "overriden_lines": 0
+    },
+    "cf369f22764759ba": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "opencode-transcript-ses_2632ff397ffeFmq5Y3m4GOYpQp-6791b3c7-a1db-48a1-9241-9e18748ae495",
+        "model": "unknown"
+      },
+      "human_author": "Theodoros Ploumis",
+      "messages": [],
+      "total_additions": 1,
+      "total_deletions": 1,
+      "accepted_lines": 1,
+      "overriden_lines": 0
+    }
+  }
+}
