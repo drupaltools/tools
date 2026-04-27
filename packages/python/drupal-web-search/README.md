@@ -116,3 +116,51 @@ Each result includes:
 - [@plust/search-sdk](https://github.com/PlustOrg/search-sdk) - TypeScript SDK (unified interface for Google, SerpAPI, Brave, Exa, Tavily, SearXNG, Arxiv, DuckDuckGo)
 - [ddgs](https://github.com/deedy5/ddgs) - Python metasearch library (used as the backend for duckduckgo, brave, google, bing, yahoo)
 - [wizsearch](https://github.com/mirasoth/wizsearch) - Python web search library with multiple engine support
+
+## Alternative Libraries
+
+Option A — Python (DDGS) ← simplest, most practical
+
+Free, zero API keys needed for most engines
+
+```bash
+pip install ddgs
+```
+
+```python
+from ddgs import DDGS
+
+with DDGS() as ddgs:
+    results = list(ddgs.text("query", max_results=10))
+```
+
+9 engines: DuckDuckGo, Brave, Google, Bing, Yandex, Yahoo, Wikipedia, Mojeek, Gropipedia
+
+Option B — Python (WizSearch) ← closer to PlustOrg model
+
+```bash
+pip install wizsearch
+```
+
+```python
+from wizsearch import WizSearch, WizSearchConfig
+
+config = WizSearchConfig(enabled_engines=["duckduckgo", "brave", "tavily"])
+results = WizSearch(config).search("query")
+```
+
+9 engines: DuckDuckGo, Tavily, Brave, Google, Bing, SearXNG, Baidu, Google AI, WeChat
+
+Option C — TypeScript (@plust/search-sdk) ← closest to your reference
+
+```bash
+npm install @plust/search-sdk
+```
+
+```typescript
+import { google, webSearch } from '@plust/search-sdk';
+
+const results = await webSearch({ query, provider: [google.configure({apiKey, cx})] });
+```
+
+9 engines: Google, SerpAPI, Brave, Exa, Tavily, SearXNG, Arxiv, DuckDuckGo, Perplexity
