@@ -114,6 +114,7 @@ Each result includes:
 ## Similar tools
 
 - [@plust/search-sdk](https://github.com/PlustOrg/search-sdk) - TypeScript SDK (unified interface for Google, SerpAPI, Brave, Exa, Tavily, SearXNG, Arxiv, DuckDuckGo)
+- [openrouter SDK web-search](https://openrouter.ai/docs/guides/features/server-tools/web-search)
 - [ddgs](https://github.com/deedy5/ddgs) - Python metasearch library (used as the backend for duckduckgo, brave, google, bing, yahoo)
 - [wizsearch](https://github.com/mirasoth/wizsearch) - Python web search library with multiple engine support
 
